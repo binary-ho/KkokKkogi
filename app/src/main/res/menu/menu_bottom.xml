@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/mainTab"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@android:drawable/star_off"
+        android:title="메인" />
+    <item
+        android:id="@+id/wardManagementTab"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_lock_idle_alarm"
+        android:title="친구관리" />
+    <item
+        android:id="@+id/settingTab"
+        app:showAsAction="ifRoom"
+        android:enabled="true"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="설정" />
+</menu>
