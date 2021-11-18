@@ -3,6 +3,7 @@ package com.blossom.alpacapaca.kkokkkogi.useractivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -66,7 +67,7 @@ public class AddWardActivity extends AppCompatActivity {
         parentId = intent.getStringExtra("loginUserId");
         loginEmail = intent.getStringExtra("loginEmail");
         loginPassword = intent.getStringExtra("loginPassword");
-        Toast.makeText(AddWardActivity.this, parentId+ "로 로그인", Toast.LENGTH_SHORT).show();
+        Toast.makeText(AddWardActivity.this, parentId + "로 로그인", Toast.LENGTH_SHORT).show();
 
         //parent = FirebaseAuth.getInstance().getCurrentUser();
 //        parentInfo = new MainActivity();
@@ -114,7 +115,9 @@ public class AddWardActivity extends AppCompatActivity {
 
                             String wardId = FirebaseWard.getUid();
                             Toast.makeText(AddWardActivity.this, wardId + "로 만들어짐!", Toast.LENGTH_SHORT).show();
+                            Log.d("AddWardActivity", wardId + "로 ward 생성");
                             //referenceWard = referenceParent.getDatabase().getReference("Ward").child(wardId);
+
                             referenceWard = referenceParent.child("Wards").child(wardId);
 
                             Ward ward = new Ward(wardId, email, password, parentId, nameForWard, nameForMe, born);
@@ -125,17 +128,17 @@ public class AddWardActivity extends AppCompatActivity {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
-                                        Toast.makeText(AddWardActivity.this, "친구 추가를 성공했습니다.", Toast.LENGTH_SHORT).show();
                                         //plusNumWard();
                                         Intent intent = new Intent(AddWardActivity.this, MainActivity.class);
                                         // intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         // startActivity(intent);
+                                        Log.d("AddWardActivity", authForWard.getUid() + " 로그아웃");
                                         authForWard.signOut();
                                         authForWard.signInWithEmailAndPassword(loginEmail, loginPassword).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                             @Override
                                             public void onComplete(@NonNull Task<AuthResult> task) {
                                                 if(task.isSuccessful()) {
-                                                    Toast.makeText(AddWardActivity.this, "재로그인 성공", Toast.LENGTH_SHORT).show();
+                                                    Log.d("AddWardActivity", authForWard.getUid() + "로 재로그인");
                                                 } else {
                                                     Toast.makeText(AddWardActivity.this, "경고: 재로그인 실패", Toast.LENGTH_SHORT).show();
                                                 }
@@ -155,19 +158,5 @@ public class AddWardActivity extends AppCompatActivity {
                         }
                     }
                 });
-    }
-    private void plusNumWard() {
-        referenceParent.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User user = snapshot.getValue(User.class);
-                assert user != null;
-                user.addWard();
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
     }
 }

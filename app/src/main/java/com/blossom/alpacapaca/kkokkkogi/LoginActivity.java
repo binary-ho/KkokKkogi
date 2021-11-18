@@ -72,7 +72,7 @@ public class LoginActivity extends AppCompatActivity {
                                     if(task.isSuccessful()) {
                                         FirebaseUser firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                                         String loginUserId = firebaseUser.getUid();
-                                        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(loginUserId);
+                                        //DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(loginUserId);
                                         //DatabaseReference checkWard = reference.child("isWard");
                                         Intent intent = null;
                                         if(firebaseUser.getDisplayName() == null){
@@ -80,15 +80,15 @@ public class LoginActivity extends AppCompatActivity {
                                         }
                                         else if(firebaseUser.getDisplayName().equals("User")) {
                                             intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            intent.putExtra("isWard", "false");
+                                            //intent.putExtra("isWard", "false");
                                         } else  {
                                             intent = new Intent(getApplicationContext(), WardMainActivity.class);
-                                            intent.putExtra("isWard", "true");
+                                            //intent.putExtra("isWard", "true");
                                         }
-
-                                        intent.putExtra("loginUserId", loginUserId);
-                                        intent.putExtra("loginEmail", text_email);
-                                        intent.putExtra("loginPassword", text_password);
+                                        // getCurrentUser 도입으로 삭제 가능 테스트
+//                                        intent.putExtra("loginUserId", loginUserId);
+//                                        intent.putExtra("loginEmail", text_email);
+//                                        intent.putExtra("loginPassword", text_password);
                                         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                         finish();

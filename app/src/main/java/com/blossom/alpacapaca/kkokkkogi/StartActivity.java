@@ -8,6 +8,9 @@ import android.widget.Button;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
+import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
+import com.blossom.alpacapaca.kkokkkogi.wardacrivity.WardMainActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
 // 첫 화면
@@ -51,16 +54,25 @@ public class StartActivity extends AppCompatActivity {
     // 굳이 없어도 될 것 같고, 오류 발생
     // 최근 접속자를 블러오는 방식 때문에 아무래도 최근에 만든 이용인 계정을 불러와버리는 듯.
     // getCurrentUser에 대한 이해 필요
-//    @Override
-//    protected void onStart() {
-//        super.onStart();
-//        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-//
-//        // null 체크
-//        if(firebaseUser != null) {
-//            Intent intent = new Intent(StartActivity.this, MainActivity.class);
-//            startActivity(intent);
-//            finish();
-//        }
-//    }
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+
+        // null 체크
+        if(firebaseUser != null) {
+            Intent intent = null;
+            if(firebaseUser.getDisplayName().equals("User")){
+                intent = new Intent(StartActivity.this, MainActivity.class);
+//                intent.putExtra("isWard", "false");
+            } else {
+                intent = new Intent(StartActivity.this, WardMainActivity.class);
+//                intent.putExtra("isWard", "true");
+            }
+            intent.putExtra("loginUserId", firebaseUser.getUid());
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(intent);
+            finish();
+        }
+    }
 }

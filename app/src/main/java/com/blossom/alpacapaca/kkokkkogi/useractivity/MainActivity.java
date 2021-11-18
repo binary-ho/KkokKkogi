@@ -6,11 +6,13 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blossom.alpacapaca.kkokkkogi.Model.User;
 import com.blossom.alpacapaca.kkokkkogi.R;
 import com.blossom.alpacapaca.kkokkkogi.StartActivity;
 import com.blossom.alpacapaca.kkokkkogi.fragments.MainFragment;
@@ -19,7 +21,13 @@ import com.blossom.alpacapaca.kkokkkogi.fragments.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -36,15 +44,17 @@ public class MainActivity extends AppCompatActivity {
     //private FragmentStateAdapter pagerAdapter;
 
     CircleImageView profile_image;
-    TextView username;
+    TextView textView1MainFragment;
 
-    private static FirebaseUser firebaseUser;
+    private static FirebaseUser loginUser;
     private static String loginUserId;
     private static String isWard;
     private static String loginEmail;
     private static String loginPassword;
+    private static String loginUserName;
     private DatabaseReference reference;
-    private String userId;
+
+    User user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,18 +62,45 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         // 방금 로그인한 아이디가 누구니
-        intent = getIntent();
-        String id_temp = intent.getStringExtra("loginUserId");
-        if(id_temp != null) {
-            loginUserId = id_temp;
-        }
-        String isWard_temp = intent.getStringExtra("isWard");
-        if(isWard_temp != null) {
-            isWard = isWard_temp;
+//        intent = getIntent();
+//        String id_temp = intent.getStringExtra("loginUserId");
+//        if(id_temp != null) {
+//            loginUserId = id_temp;
+//        }
+//        String isWard_temp = intent.getStringExtra("isWard");
+//        if(isWard_temp != null) {
+//            isWard = isWard_temp;
+//        }
+//
+//        loginEmail = intent.getStringExtra("loginEmail");
+//        loginPassword = intent.getStringExtra("loginPassword");
+
+
+        loginUser = FirebaseAuth.getInstance().getCurrentUser();
+        loginUserId = loginUser.getUid();
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(loginUserId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                user = snapshot.getValue(User.class);
+                loginEmail = user.getLoginEmail();
+                loginPassword = user.getLoginPassword();
+                loginUserName = user.getUsername();
+                Log.d("MainActivityTest", "로그인 이메일: " + loginEmail);
+                Log.d("MainActivityTest", "로그인 패스워드: " + loginPassword);
+                Log.d("MainActivityTest", "로그인 유저 이름: " + loginUserName);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        isWard = "false";
+        if(loginUserName == null) {
+            loginUserName = "회원";
         }
 
-        loginEmail = intent.getStringExtra("loginEmail");
-        loginPassword = intent.getStringExtra("loginPassword");
 
         Toast.makeText(MainActivity.this, loginUserId+ "로 로그인", Toast.LENGTH_SHORT).show();
         Toast.makeText(MainActivity.this, "CurrentUser = \n" + FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
@@ -129,6 +166,8 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             }
         });
+
+
 
         // 뷰 페이저
 //        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
@@ -234,7 +273,7 @@ public class MainActivity extends AppCompatActivity {
 //    }
 
     public static FirebaseUser getUser() {
-        return firebaseUser;
+        return loginUser;
     }
 
     public static String getLoginUserId() {
@@ -247,6 +286,9 @@ public class MainActivity extends AppCompatActivity {
     public static String getLoginEmail() { return loginEmail;}
     public static String getLoginPassword() {
         return loginPassword;
+    }
+    public static String getLoginUserName() {
+        return loginUserName;
     }
 
 //    public String getUserId() {

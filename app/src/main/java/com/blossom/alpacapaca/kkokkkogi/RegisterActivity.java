@@ -90,7 +90,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                            hashMap.put("id", userid);
 //                            hashMap.put("username", username);
 //                            hashMap.put("imageURL", "default");
-                            User user = new User(userid, username, "default");
+                            User user = new User(userid, username, email, password, "default");
 
                             //reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>()
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {

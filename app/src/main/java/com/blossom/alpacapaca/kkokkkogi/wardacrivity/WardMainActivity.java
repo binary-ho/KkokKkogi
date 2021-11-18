@@ -6,14 +6,17 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -27,13 +30,17 @@ public class WardMainActivity extends AppCompatActivity {
 
     Intent intent;
 
+    FirebaseUser loginWard;
     DatabaseReference reference;
+    Ward ward;
 
     private static String loginWardId;
     private static String parentId;
     private static String isWard;
+    private static String wardName;
 
     FloatingActionButton chatButton;
+    TextView textView1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,15 +48,18 @@ public class WardMainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ward_main);
 
         // 방금 로그인한 아이디가 누구니
-        intent = getIntent();
-        String id_temp = intent.getStringExtra("loginUserId");
-        if(id_temp != null) {
-            loginWardId = id_temp;
-        }
-        String isWard_temp = intent.getStringExtra("isWard");
-        if(isWard_temp != null) {
-            isWard = isWard_temp;
-        }
+        loginWard = FirebaseAuth.getInstance().getCurrentUser();
+        loginWardId = loginWard.getUid();
+        isWard = "true";
+//        intent = getIntent();
+//        String id_temp = intent.getStringExtra("loginUserId");
+//        if(id_temp != null) {
+//            loginWardId = id_temp;
+//        }
+//        String isWard_temp = intent.getStringExtra("isWard");
+//        if(isWard_temp != null) {
+//            isWard = isWard_temp;
+//        }
         Toast.makeText(WardMainActivity.this, loginWardId + "로 로그인", Toast.LENGTH_SHORT).show();
 
         // 액션바 할당, 타이틀 지우기
@@ -70,6 +80,30 @@ public class WardMainActivity extends AppCompatActivity {
 
             }
         });
+        textView1 = findViewById(R.id.ward_main_text1);
+        if(parentId != null){
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(parentId).child("Wards").child(loginWardId);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ward = snapshot.getValue(Ward.class);
+                wardName = ward.getNameForWard();
+                Log.d("WardMainActivity", "wardName: " + wardName);
+                textView1.setText(wardName + "님 안녕하세요!");
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        }
+        if(wardName == null) {
+            wardName = "회원";
+            textView1.setText(wardName + "님 안녕하세요!");
+        }
+
+
 
         chatButton = findViewById(R.id.chat_button);
         chatButton.setOnClickListener(new View.OnClickListener() {
@@ -123,7 +157,7 @@ public class WardMainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(WardMainActivity.this, FirebaseAuth.getInstance().toString() + " sign out!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(WardMainActivity.this, FirebaseAuth.getInstance().getUid() + " sign out!", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(WardMainActivity.this, StartActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -145,5 +179,8 @@ public class WardMainActivity extends AppCompatActivity {
     }
     public static String getIsWard() {
         return isWard;
+    }
+    public static String getWardName() {
+        return wardName;
     }
 }

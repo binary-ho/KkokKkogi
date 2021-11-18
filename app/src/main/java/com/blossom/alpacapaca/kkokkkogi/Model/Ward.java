@@ -1,15 +1,14 @@
 package com.blossom.alpacapaca.kkokkkogi.Model;
 
 import android.util.Log;
-import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class Ward {
     // 받을 정보
     private String id;
-    private String email;
-    private String password;
+    private String loginEmail;
+    private String loginPassword;
     private String parentId;
     private String nameForWard;
     private String nameForMe;
@@ -23,8 +22,8 @@ public class Ward {
     public Ward() {
         // 싹 밀어야 할 수도 있어
         this.id = getId();
-        this.email = getEmail();
-        this.password = getPassword();
+        this.loginEmail = getLoginEmail();
+        this.loginPassword = getLoginPassword();
         this.parentId = getParentId();
         this.nameForWard = getNameForWard();
         this.nameForMe = getNameForMe();
@@ -35,10 +34,10 @@ public class Ward {
         this.medicines = new ArrayList<>();
     }
     // 아이디(받기), 부모아이디(자동), 보여질 이름(받기), 내가 볼 이름(받기), 출생일
-    public Ward(String id, String email, String password, String parentId, String nameForWard, String nameForMe, String born) {
+    public Ward(String id, String loginEmail, String loginPassword, String parentId, String nameForWard, String nameForMe, String born) {
         this.id = id;
-        this.email = email;
-        this.password = password;
+        this.loginEmail = loginEmail;
+        this.loginPassword = loginPassword;
         this.parentId = parentId;
         this.nameForWard = nameForWard;
         this.nameForMe = nameForMe;
@@ -54,18 +53,18 @@ public class Ward {
     public void setId(String id) {
         this.id = id;
     }
-    public String getEmail() {
-        return email;
+    public String getLoginEmail() {
+        return loginEmail;
     }
 
-    public void setEmail(String email) {
-        this.email = email;
+    public void setLoginEmail(String loginEmail) {
+        this.loginEmail = loginEmail;
     }
-    public String getPassword() {
-        return password;
+    public String getLoginPassword() {
+        return loginPassword;
     }
-    public void setPassword(String password) {
-        this.password = password;
+    public void setLoginPassword(String loginPassword) {
+        this.loginPassword = loginPassword;
     }
     public String getParentId() {
         return parentId;

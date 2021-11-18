@@ -32,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="안녕하세요! "
+                android:text="꼭꼭이"
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp"/>
@@ -41,7 +41,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="ㅇㅇㅇ님"
+                android:text=""
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 android:textSize="25sp"/>
@@ -54,6 +54,17 @@
         android:layout_height="match_parent"
 
         android:layout_below="@+id/appbar">
+
+        <TextView
+            android:id="@+id/ward_main_text1"
+            android:layout_height="wrap_content"
+            android:layout_width="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Main 화면"
+            android:textColor="@color/black"
+            android:textSize="50sp"
+            android:textStyle="bold" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/chat_button"

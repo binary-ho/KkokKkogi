@@ -14,6 +14,7 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blossom.alpacapaca.kkokkkogi.Model.User;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -22,8 +23,6 @@ import com.google.firebase.database.ValueEventListener;
 import com.blossom.alpacapaca.kkokkkogi.adapter.MessageAdapter;
 import com.blossom.alpacapaca.kkokkkogi.Model.Chat;
 import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
-
-import com.blossom.alpacapaca.kkokkkogi.R;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -34,34 +33,36 @@ public class ChatActivity extends AppCompatActivity {
     private  static String userId;
     private static String wardId;
     private static String isWard;
-    String wardname;
+    String receiverName;
 
-    TextView wardnameView;
+    TextView nameView;
     //CircleImageView profile_image;
     ImageButton button_send;
     EditText text_send;
-
-    //FirebaseUser fuser;
-    DatabaseReference reference;
 
     MessageAdapter messageAdapter;
     ArrayList<Chat> chats;
     RecyclerView recyclerView;
 
     Intent intent;
+    DatabaseReference reference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chat);
 
+
+        // getCurrentUser로 갈아타보자
         intent = getIntent();
         userId = intent.getStringExtra("userId");
         wardId = intent.getStringExtra("wardId");
         isWard = intent.getStringExtra("isWard");
-//        Log.d("ChatActivity", userId);
-//        Log.d("ChatActivity", wardId);
-        Log.d("ChatActivity", isWard);
+        Log.d("ChatActivity", "1. " + userId);
+        Log.d("ChatActivity", "2. " + wardId);
+        Log.d("ChatActivity", "3. " + isWard);
+        //Log.d("ChatActivity", isWard);
+
 
         // 리사이클러뷰 설정
         recyclerView = findViewById(R.id.chat_recycler_view);
@@ -72,7 +73,9 @@ public class ChatActivity extends AppCompatActivity {
         linearLayoutManager.setStackFromEnd(true);  // ?? 검색 ㄱㄱ
         recyclerView.setLayoutManager(linearLayoutManager);
 
-        wardnameView = findViewById(R.id.user_name_title);
+
+        nameView = findViewById(R.id.user_name_title);
+
         //profile_image = findViewById(R.id.profile_image);
         text_send = findViewById(R.id.text_send);
         button_send = findViewById(R.id.button_send);
@@ -105,6 +108,25 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+        if(isWard.equals("true")) {
+            //Log.d("ChatActivity", "isWard read: " + "true");
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User user = snapshot.getValue(User.class);
+                    receiverName = user.getUsername();
+                    nameView.setText(receiverName);
+                    Log.d("ChatActivity", "receiverName: " + receiverName);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
         reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId);
         reference.addValueEventListener(new ValueEventListener() {
             @Override
@@ -114,16 +136,12 @@ public class ChatActivity extends AppCompatActivity {
                 //wardnameView.setText(ward.getNameForMe());
 
                 readMessage(userId, wardId, "default");
-                //profile_image.setImageResource(R.drawable.chicken);
-                // 구분
-//                if (isWard.equals("false")) {
-//                    // ward가 아닐때
-//                    readMessage(userId, wardId, "default");
-//
-//                } else {
-//                    // ward일때
-//                    readMessage(wardId, userId, "default");
-//                }
+                if(isWard.equals("false")) {
+                    //Log.d("ChatActivity", "isWard read: " + "false");
+                    receiverName = ward.getNameForMe();
+                    nameView.setText(receiverName);
+                    Log.d("ChatActivity", "receiverName: " + receiverName);
+                }
 
             }
             @Override
