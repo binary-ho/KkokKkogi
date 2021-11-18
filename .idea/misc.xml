@@ -11,6 +11,8 @@
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/my_back_icon.xml" value="1.515625" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/my_white_back_icon.xml" value="1.515625" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/ic_wards_background.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/ic_wards_foreground.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/item_color.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/splash_background_chicken.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_add_ward.xml" value="0.23645833333333333" />
@@ -21,6 +23,11 @@
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/bar_layout.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/chat_box_receiver.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/chat_box_sender.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/chat_item.xml" value="0.6" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/chat_preview_item.xml" value="0.115625" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_chat.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_chat_preview.xml" value="0.1" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_chats.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_main.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_management_ward.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_setting.xml" value="0.23645833333333333" />

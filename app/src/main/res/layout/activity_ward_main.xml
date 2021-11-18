@@ -73,13 +73,13 @@
             android:layout_alignParentBottom="true"
             android:layout_centerInParent="true"
             android:layout_marginBottom="30dp"
-            app:fabCustomSize="75dp"
 
-            android:foreground="@android:drawable/sym_action_chat"
-            android:foregroundTint="@color/black"
-            android:foregroundGravity="center"
             android:backgroundTint="@color/colorPrimary"
-            android:contentDescription="chat" />
+            android:contentDescription="chat"
+            android:foreground="@android:drawable/sym_action_chat"
+            android:foregroundGravity="center"
+            android:foregroundTint="@color/black"
+            app:fabCustomSize="75dp" />
 
     </RelativeLayout>
 

@@ -2,6 +2,7 @@ package com.blossom.alpacapaca.kkokkkogi.fragments;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +15,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +39,8 @@ public class ManagementWardFragment extends Fragment {
     private RecyclerView recyclerView;
     private WardAdapter wardAdapter;
 
+    FirebaseUser loginUser;
+
     private DatabaseReference wardReference;
     private ArrayList<Ward> mWards;
 
@@ -50,6 +55,7 @@ public class ManagementWardFragment extends Fragment {
         recyclerView = rootView.findViewById(R.id.wardManagementRecyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mWards = new ArrayList<>();
+        loginUser = FirebaseAuth.getInstance().getCurrentUser();
         readWards();
         //wardAdapter = new WardAdapter(rootView.getContext());
         //recyclerView.setAdapter(wardAdapter);
@@ -95,8 +101,8 @@ public class ManagementWardFragment extends Fragment {
             public void onClick(View view) {
                 // 의도대로 잘 될지 모르겠어
                 Intent intent = new Intent( rootView.getContext(), AddWardActivity.class);
-                intent.putExtra("loginUserId", MainActivity.getLoginUserId());
-                intent.putExtra("loginEmail", MainActivity.getLoginEmail());
+                intent.putExtra("loginUserId", loginUser.getUid());
+                intent.putExtra("loginEmail", loginUser.getEmail());
                 intent.putExtra("loginPassword", MainActivity.getLoginPassword());
                 //startActivity(new Intent(rootView.getContext(), AddWardActivity.class));
                 startActivity(intent);
@@ -125,7 +131,7 @@ public class ManagementWardFragment extends Fragment {
     }
 
     private void readWards() {
-        wardReference = FirebaseDatabase.getInstance().getReference("Users").child(MainActivity.getLoginUserId()).child("Wards");
+        wardReference = FirebaseDatabase.getInstance().getReference("Users").child(loginUser.getUid()).child("Wards");
 
 
         wardReference.addValueEventListener(new ValueEventListener() {
@@ -133,6 +139,7 @@ public class ManagementWardFragment extends Fragment {
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 mWards.clear();
                 for(DataSnapshot elem: snapshot.getChildren()) {
+                    Log.d("ManagementWard", elem.toString());
                     Ward ward = elem.getValue(Ward.class);
                     assert ward != null;
                     mWards.add(ward);

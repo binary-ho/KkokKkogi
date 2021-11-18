@@ -158,22 +158,17 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendMessage(String sender, String receiver, String message) {
 
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("Chats");
-
-        HashMap<String, Object> hashMap = new HashMap<>();
-        hashMap.put("sender", sender);
-        hashMap.put("receiver", receiver);
-        hashMap.put("message", message);
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("chats");
 
         Chat chat = new Chat(sender, receiver, message);
-        //referenceMassage.child("Chats").push().setValue(hashMap);
+        //referenceMassage.child("chats").push().setValue(hashMap);
         reference.push().setValue(chat);
 
     }
 
     private void readMessage(final String senderId, final String receiverId, final String imageUrl) {
         chats = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("Chats");
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("chats");
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

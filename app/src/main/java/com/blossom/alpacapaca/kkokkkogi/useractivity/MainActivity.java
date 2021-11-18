@@ -15,7 +15,7 @@ import android.widget.Toast;
 import com.blossom.alpacapaca.kkokkkogi.Model.User;
 import com.blossom.alpacapaca.kkokkkogi.R;
 import com.blossom.alpacapaca.kkokkkogi.StartActivity;
-import com.blossom.alpacapaca.kkokkkogi.fragments.MainFragment;
+import com.blossom.alpacapaca.kkokkkogi.fragments.ChatPreviewFragment;
 import com.blossom.alpacapaca.kkokkkogi.fragments.ManagementWardFragment;
 import com.blossom.alpacapaca.kkokkkogi.fragments.SettingFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -27,8 +27,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.w3c.dom.Text;
-
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
 
     Intent intent;
 
-    MainFragment mainFragment;
+    ChatPreviewFragment chatPreviewFragment;
     ManagementWardFragment managementWardFragment;
     SettingFragment settingFragment;
 
@@ -142,22 +140,22 @@ public class MainActivity extends AppCompatActivity {
 //        });
 
         // 단순 바텀 네비게이션이랑 프레그먼트 뷰 조합
-        mainFragment = new MainFragment();
         managementWardFragment = new ManagementWardFragment();
+        chatPreviewFragment = new ChatPreviewFragment();
         settingFragment = new SettingFragment();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.container, managementWardFragment).commit();
 
         BottomNavigationView bottomNavigation = findViewById(R.id.bottom_navigation);
         bottomNavigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.mainTab:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.container, mainFragment).commit();
-                        return true;
                     case R.id.wardManagementTab:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, managementWardFragment).commit();
+                        return true;
+                    case R.id.chatTab:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.container, chatPreviewFragment).commit();
                         return true;
                     case R.id.settingTab:
                         getSupportFragmentManager().beginTransaction().replace(R.id.container, settingFragment).commit();

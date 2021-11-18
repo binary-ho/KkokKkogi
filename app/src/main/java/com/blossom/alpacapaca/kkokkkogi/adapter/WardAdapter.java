@@ -66,7 +66,7 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         // holder.setItem(ward); 이거 뺴도 되는거야?
         holder.wardName.setText(ward.getNameForMe());
         if(ward.getImageURL().equals("default")){
-            holder.profile_image.setImageResource(R.drawable.chicken);
+            holder.profile_image.setImageResource(R.drawable.chicken_small);
         } else {
             Glide.with(mContext).load(ward.getImageURL()).into(holder.profile_image);
         }

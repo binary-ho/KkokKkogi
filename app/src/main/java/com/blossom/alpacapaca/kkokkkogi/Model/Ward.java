@@ -3,6 +3,9 @@ package com.blossom.alpacapaca.kkokkkogi.Model;
 import android.util.Log;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 public class Ward {
     // 받을 정보
@@ -16,6 +19,9 @@ public class Ward {
     private String imageURL;
     private static boolean isWard;
 
+    // fuck
+    private HashMap<String, Chat> chats;
+
     // 약 배열
     ArrayList<Medicine> medicines;
 
@@ -28,13 +34,15 @@ public class Ward {
         this.nameForWard = getNameForWard();
         this.nameForMe = getNameForMe();
         this.born = getBorn();
+        //this.chats = new ArrayList<>();
+        this.chats = new HashMap<String, Chat>();
         isWard = true;
 
         imageURL = "default";
         this.medicines = new ArrayList<>();
     }
     // 아이디(받기), 부모아이디(자동), 보여질 이름(받기), 내가 볼 이름(받기), 출생일
-    public Ward(String id, String loginEmail, String loginPassword, String parentId, String nameForWard, String nameForMe, String born) {
+    public Ward(String id, String loginEmail, String loginPassword, String parentId, String nameForWard, String nameForMe, String born, HashMap<String, Chat> chats) {
         this.id = id;
         this.loginEmail = loginEmail;
         this.loginPassword = loginPassword;
@@ -43,6 +51,7 @@ public class Ward {
         this.nameForMe = nameForMe;
         this.born = born;
         isWard = true;
+        this.chats = chats;
         // this.wardName = name_for_me + " (" + born.substring(0, 2) + "년생)";
         this.imageURL = "default";
         this.medicines = new ArrayList<>();
@@ -111,5 +120,31 @@ public class Ward {
     }
     public ArrayList<Medicine> getMedicineArray() { return medicines; }
     public Medicine getMedicine(int index) { return medicines.get(index); }
+
+    public int chatsSize() {
+        if(this.chats == null) {
+            return 0;
+        }
+        else {
+            return this.chats.size();
+        }
+    }
+    public HashMap<String, Chat> getChats() {
+        return chats;
+    }
+    public String lastMessage() {
+        String key = "";
+        if(this.chats != null) {
+            Iterator<String> iterator = chats.keySet().iterator();
+            while (iterator.hasNext()) {
+                key = (String) iterator.next();
+            }
+            Log.d("Ward", "1. "+ key);
+        }
+        return this.chats.get(key).getMessage();
+    }
+    public void setChats(HashMap<String, Chat> chats) {
+        this.chats = chats;
+    }
 }
 

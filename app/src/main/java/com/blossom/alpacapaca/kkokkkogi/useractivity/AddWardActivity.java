@@ -12,21 +12,21 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.blossom.alpacapaca.kkokkkogi.Model.Chat;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
-import com.blossom.alpacapaca.kkokkkogi.Model.User;
 import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
 import com.rengwuxian.materialedittext.MaterialEditText;
 import com.blossom.alpacapaca.kkokkkogi.R;
+
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class AddWardActivity extends AppCompatActivity {
 
@@ -120,7 +120,9 @@ public class AddWardActivity extends AppCompatActivity {
 
                             referenceWard = referenceParent.child("Wards").child(wardId);
 
-                            Ward ward = new Ward(wardId, email, password, parentId, nameForWard, nameForMe, born);
+                            //ArrayList<Chat> chats = new ArrayList<>();
+                            HashMap<String, Chat> chats = new HashMap<String, Chat>();
+                            Ward ward = new Ward(wardId, email, password, parentId, nameForWard, nameForMe, born, chats);
                             referenceBase = referenceBase.child(wardId);
                             referenceBase.setValue(parentId);
                             //reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>()
