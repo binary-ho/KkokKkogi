@@ -70,7 +70,7 @@ public class StartActivity extends AppCompatActivity {
 //                intent.putExtra("isWard", "true");
             }
             intent.putExtra("loginUserId", firebaseUser.getUid());
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(intent);
             finish();
         }

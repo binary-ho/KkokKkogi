@@ -4,6 +4,7 @@ public class User {
     private String id;
     private String username;
     private String imageURL;    // 이미지 url
+    private Boolean online;
 
     private String loginEmail;
     private String loginPassword;
@@ -11,7 +12,7 @@ public class User {
     //private int numWard;
     private static boolean isWard;
 
-    public User(String id, String username, String loginEmail, String loginPassword, String imageURL) {
+    public User(String id, String username, String loginEmail, String loginPassword, String imageURL, Boolean online) {
         this.id = id;
         this.username = username;
         this.imageURL = imageURL;
@@ -20,6 +21,7 @@ public class User {
         this.loginPassword = loginPassword;
         isWard = false;
         //this.isWard = new IsWard(true);
+        this.online = online;
     }
     public User() {}
     public String getId() {
@@ -62,5 +64,14 @@ public class User {
     public void setLoginPassword(String loginPassword) {
         this.loginPassword = loginPassword;
     }
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
+    }
+
 
 }

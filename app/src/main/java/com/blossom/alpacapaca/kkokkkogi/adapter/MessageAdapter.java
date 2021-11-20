@@ -58,9 +58,12 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MessageAdapter.ViewHolder holder, int position) {
         Chat chat = chats.get(position);
         holder.show_message.setText(chat.getMessage());
+        if(chat.getIsSeen()) {
+            holder.text_seen.setVisibility(View.GONE);
+        }
     }
 
     @Override
@@ -74,11 +77,13 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.ViewHold
     static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView show_message;
         public ImageView profile_image;
+        public TextView text_seen;
 
         public ViewHolder(View itemView) {
             super(itemView);
             show_message = itemView.findViewById(R.id.show_message);
             profile_image = itemView.findViewById(R.id.profile_image);
+            text_seen = itemView.findViewById(R.id.text_seen);
         }
     }
 

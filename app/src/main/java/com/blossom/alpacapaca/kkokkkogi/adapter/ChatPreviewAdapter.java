@@ -1,6 +1,8 @@
 package com.blossom.alpacapaca.kkokkkogi.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,13 +13,18 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blossom.alpacapaca.kkokkkogi.ChatActivity;
 import com.blossom.alpacapaca.kkokkkogi.Model.Chat;
 import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
 import com.blossom.alpacapaca.kkokkkogi.R;
+import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
 import com.bumptech.glide.Glide;
+import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 // 모든 ChatPreview를 Ward로 바꿔볼게
 //public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.ViewHolder>{
@@ -59,24 +66,13 @@ public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.
         }
 
         holder.chatContent.setText(ward.lastMessage());
-//        holder.cardView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                        Intent intent = new Intent(mContext, ChatActivity.class);
-//                        intent.putExtra("wardId", ward.getId());
-//                        intent.putExtra("userId", userId);
-//                        intent.putExtra("isWard", MainActivity.getIsWard());
-//                        intent.putExtra("loginEmail", MainActivity.getLoginEmail());
-//                        intent.putExtra("loginPassword", MainActivity.getLoginPassword());
-//
-//                        Log.d("WardAdapter", MainActivity.getIsWard());
-//                        Log.d("WardAdapter", MainActivity.getLoginEmail());
-//                        Log.d("WardAdapter", MainActivity.getLoginPassword());
-//
-//                        mContext.startActivity(intent);
-//                
-//            }
-//        });
+        holder.itemView.setOnClickListener((view -> {
+            Intent intent = new Intent(mContext, ChatActivity.class);
+            intent.putExtra("wardId", ward.getId());
+            intent.putExtra("userId", FirebaseAuth.getInstance().getCurrentUser().getUid());
+            intent.putExtra("isWard", "false");
+            mContext.startActivity(intent);
+        }));
 
     }
 
@@ -91,7 +87,7 @@ public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.
     static class ViewHolder extends RecyclerView.ViewHolder {
         View rootView;
         public TextView wardName;
-        public ImageView profile_image;
+        public CircleImageView profile_image;
         public TextView chatContent;
         public CardView cardView;
 
@@ -99,7 +95,7 @@ public class ChatPreviewAdapter extends RecyclerView.Adapter<ChatPreviewAdapter.
             super(itemView);
 
             wardName = itemView.findViewById(R.id.ward_name);
-            profile_image = itemView.findViewById(R.id.imageView2);
+            profile_image = itemView.findViewById(R.id.profile_image);
             cardView = itemView.findViewById(R.id.chat_preview_box);
             chatContent = itemView.findViewById(R.id.chat_content);
         }

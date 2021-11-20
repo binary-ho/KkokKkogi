@@ -10,6 +10,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -17,6 +18,7 @@ import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -25,6 +27,8 @@ import com.google.firebase.database.ValueEventListener;
 import com.blossom.alpacapaca.kkokkkogi.ChatActivity;
 import com.blossom.alpacapaca.kkokkkogi.R;
 import com.blossom.alpacapaca.kkokkkogi.StartActivity;
+
+import java.util.HashMap;
 
 public class WardMainActivity extends AppCompatActivity {
 
@@ -47,6 +51,8 @@ public class WardMainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ward_main);
 
+        Log.d("WardMainActivity", "onCreate()!");
+
         // 방금 로그인한 아이디가 누구니
         loginWard = FirebaseAuth.getInstance().getCurrentUser();
         loginWardId = loginWard.getUid();
@@ -68,11 +74,12 @@ public class WardMainActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("");
 
         reference = FirebaseDatabase.getInstance().getReference("Wards").child(loginWardId);
+        Log.d("WardMain", "reference: " + reference.toString());
         reference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 parentId = snapshot.getValue(String.class);
-                Log.d("WardMain", parentId);
+                Log.d("WardMain", "Load parentId!");
             }
 
             @Override
@@ -82,28 +89,26 @@ public class WardMainActivity extends AppCompatActivity {
         });
         textView1 = findViewById(R.id.ward_main_text1);
         if(parentId != null){
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(parentId).child("Wards").child(loginWardId);
-        reference.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ward = snapshot.getValue(Ward.class);
-                wardName = ward.getNameForWard();
-                Log.d("WardMainActivity", "wardName: " + wardName);
-                textView1.setText(wardName + "님 안녕하세요!");
-            }
+            reference = FirebaseDatabase.getInstance().getReference("Users").child(parentId).child("Wards").child(loginWardId);
+            reference.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    ward = snapshot.getValue(Ward.class);
+                    wardName = ward.getNameForWard();
+                    Log.d("WardMainActivity", "wardName: " + wardName);
+                    textView1.setText(wardName + "님 안녕하세요!");
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
         }
         if(wardName == null) {
             wardName = "회원";
             textView1.setText(wardName + "님 안녕하세요!");
         }
-
-
 
         chatButton = findViewById(R.id.chat_button);
         chatButton.setOnClickListener(new View.OnClickListener() {
@@ -113,12 +118,12 @@ public class WardMainActivity extends AppCompatActivity {
                 Intent intent = new Intent(WardMainActivity.this , ChatActivity.class);
                 intent.putExtra("wardId", loginWardId);
                 intent.putExtra("userId", parentId);
-                intent.putExtra("isWard", isWard);
+                intent.putExtra("isWard", "true");
 
                 startActivity(intent);
             }
         });
-
+        online(true);
 
 
 
@@ -161,8 +166,9 @@ public class WardMainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(WardMainActivity.this, StartActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                //logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // ???
                 startActivity(logoutIntent);
-                finish();
+                this.finish();
                 return true;
         }
         return false;
@@ -171,6 +177,33 @@ public class WardMainActivity extends AppCompatActivity {
 //    public static FirebaseUser getUser() {
 //        return firebaseUser;
 //    }
+
+    // 1: online
+    // 0: offline
+    public void online(boolean online) {
+        if(parentId == null) {
+            Log.d("WardMainActivity", "Pass online()!");
+            return; }
+        reference = FirebaseDatabase.getInstance().getReference("Users").child(parentId).child("Wards").child(loginWardId);
+        // why Object?
+        HashMap<String, Object> hashMap = new HashMap<>();
+        hashMap.put("online", online);
+        reference.updateChildren(hashMap);
+        Log.d("WardMainActivity", "Load online()!");
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        online(false);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        online(true);
+    }
+
     public static String getLoginWardId() {
         return loginWardId;
     }

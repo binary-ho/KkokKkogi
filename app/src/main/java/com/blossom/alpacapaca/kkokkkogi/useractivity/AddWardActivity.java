@@ -122,7 +122,7 @@ public class AddWardActivity extends AppCompatActivity {
 
                             //ArrayList<Chat> chats = new ArrayList<>();
                             HashMap<String, Chat> chats = new HashMap<String, Chat>();
-                            Ward ward = new Ward(wardId, email, password, parentId, nameForWard, nameForMe, born, chats);
+                            Ward ward = new Ward(wardId, email, password, parentId, nameForWard, nameForMe, born, chats, false);
                             referenceBase = referenceBase.child(wardId);
                             referenceBase.setValue(parentId);
                             //reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>()

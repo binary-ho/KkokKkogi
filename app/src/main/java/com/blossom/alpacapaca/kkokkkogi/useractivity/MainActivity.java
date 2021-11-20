@@ -27,6 +27,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
+
 import de.hdodenhof.circleimageview.CircleImageView;
 
 public class MainActivity extends AppCompatActivity {
@@ -211,6 +213,7 @@ public class MainActivity extends AppCompatActivity {
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(MainActivity.this, StartActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                //logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP); // ??
                 startActivity(logoutIntent);
                 finish();
                 return true;
@@ -269,6 +272,8 @@ public class MainActivity extends AppCompatActivity {
 //            return NUM_PAGES;
 //        }
 //    }
+
+
 
     public static FirebaseUser getUser() {
         return loginUser;

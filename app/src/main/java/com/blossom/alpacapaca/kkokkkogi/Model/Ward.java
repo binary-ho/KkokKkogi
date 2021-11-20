@@ -5,7 +5,6 @@ import android.util.Log;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.Map;
 
 public class Ward {
     // 받을 정보
@@ -17,6 +16,8 @@ public class Ward {
     private String nameForMe;
     private String born;    // 숫자만 + 6글자 제한두기
     private String imageURL;
+    private Boolean online;
+
     private static boolean isWard;
 
     // fuck
@@ -37,12 +38,13 @@ public class Ward {
         //this.chats = new ArrayList<>();
         this.chats = new HashMap<String, Chat>();
         isWard = true;
+        this.online = false;
 
         imageURL = "default";
         this.medicines = new ArrayList<>();
     }
     // 아이디(받기), 부모아이디(자동), 보여질 이름(받기), 내가 볼 이름(받기), 출생일
-    public Ward(String id, String loginEmail, String loginPassword, String parentId, String nameForWard, String nameForMe, String born, HashMap<String, Chat> chats) {
+    public Ward(String id, String loginEmail, String loginPassword, String parentId, String nameForWard, String nameForMe, String born, HashMap<String, Chat> chats, Boolean online) {
         this.id = id;
         this.loginEmail = loginEmail;
         this.loginPassword = loginPassword;
@@ -51,6 +53,7 @@ public class Ward {
         this.nameForMe = nameForMe;
         this.born = born;
         isWard = true;
+        this.online = online;
         this.chats = chats;
         // this.wardName = name_for_me + " (" + born.substring(0, 2) + "년생)";
         this.imageURL = "default";
@@ -139,12 +142,19 @@ public class Ward {
             while (iterator.hasNext()) {
                 key = (String) iterator.next();
             }
-            Log.d("Ward", "1. "+ key);
         }
         return this.chats.get(key).getMessage();
     }
     public void setChats(HashMap<String, Chat> chats) {
         this.chats = chats;
+    }
+
+    public Boolean getOnline() {
+        return online;
+    }
+
+    public void setOnline(Boolean online) {
+        this.online = online;
     }
 }
 

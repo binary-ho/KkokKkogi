@@ -144,7 +144,7 @@ public class ManagementWardFragment extends Fragment {
                     assert ward != null;
                     mWards.add(ward);
                 }
-                wardAdapter = new WardAdapter(rootView.getContext(), mWards);
+                wardAdapter = new WardAdapter(rootView.getContext(), mWards, true);
                 recyclerView.setAdapter(wardAdapter);
             }
             @Override

@@ -15,6 +15,9 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blossom.alpacapaca.kkokkkogi.Model.User;
+import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
+import com.blossom.alpacapaca.kkokkkogi.wardacrivity.WardMainActivity;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -45,7 +48,12 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     Intent intent;
-    DatabaseReference reference;
+    DatabaseReference referenceUser;
+    DatabaseReference referenceWard;
+    DatabaseReference referenceChat;
+
+    ValueEventListener seenListener;
+    Boolean onScreen;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,7 +80,6 @@ public class ChatActivity extends AppCompatActivity {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(ChatActivity.this);
         linearLayoutManager.setStackFromEnd(true);  // ?? 검색 ㄱㄱ
         recyclerView.setLayoutManager(linearLayoutManager);
-
 
         nameView = findViewById(R.id.user_name_title);
 
@@ -108,10 +115,15 @@ public class ChatActivity extends AppCompatActivity {
             }
         });
 
+
+
+        referenceUser = FirebaseDatabase.getInstance().getReference("Users").child(userId);
+        referenceWard = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId);
+        referenceChat = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("chats");
+
         if(isWard.equals("true")) {
             //Log.d("ChatActivity", "isWard read: " + "true");
-            reference = FirebaseDatabase.getInstance().getReference("Users").child(userId);
-            reference.addValueEventListener(new ValueEventListener() {
+            referenceUser.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     User user = snapshot.getValue(User.class);
@@ -127,8 +139,7 @@ public class ChatActivity extends AppCompatActivity {
             });
         }
 
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId);
-        reference.addValueEventListener(new ValueEventListener() {
+        referenceWard.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Ward ward = snapshot.getValue(Ward.class);
@@ -149,6 +160,9 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+        //online(true);
+        onScreen = Boolean.TRUE;
+        seenMessage();
     }
 
 //    @Override
@@ -157,19 +171,15 @@ public class ChatActivity extends AppCompatActivity {
 //    }
 
     private void sendMessage(String sender, String receiver, String message) {
-
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("chats");
-
-        Chat chat = new Chat(sender, receiver, message);
+        Chat chat = new Chat(sender, receiver, message, false);
         //referenceMassage.child("chats").push().setValue(hashMap);
-        reference.push().setValue(chat);
+        referenceChat.push().setValue(chat);
 
     }
 
     private void readMessage(final String senderId, final String receiverId, final String imageUrl) {
         chats = new ArrayList<>();
-        reference = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(wardId).child("chats");
-        reference.addValueEventListener(new ValueEventListener() {
+        referenceChat.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 chats.clear();
@@ -198,6 +208,39 @@ public class ChatActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    private void seenMessage() {
+        seenListener = referenceChat.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                for(DataSnapshot elem: snapshot.getChildren()) {
+                    Chat chat = elem.getValue(Chat.class);
+                    if(chat.getReceiver().equals(FirebaseAuth.getInstance().getCurrentUser().getUid()) && onScreen){
+                        HashMap<String, Object> hashMap = new HashMap<>();
+                        hashMap.put("isSeen", true);
+                        elem.getRef().updateChildren(hashMap);
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        onScreen = false;
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        onScreen = true;
     }
 
     public static String getUserId() {return userId;}

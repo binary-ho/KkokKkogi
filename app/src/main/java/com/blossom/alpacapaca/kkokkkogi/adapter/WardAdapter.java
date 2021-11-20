@@ -28,12 +28,14 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
     private Context mContext;
     private ArrayList<Ward> wards = new ArrayList<>();
 
+    private boolean isOnline;
+
     String userId;
 
-    public WardAdapter (Context mContext) {this.mContext = mContext;userId = MainActivity.getLoginUserId();}
-    public WardAdapter (Context mContext, ArrayList<Ward> wards) {
+    public WardAdapter (Context mContext, ArrayList<Ward> wards, boolean isOnline) {
         this.mContext = mContext;
         this.wards = wards;
+        this.isOnline = isOnline;
         userId = MainActivity.getLoginUserId();
     }
 
@@ -70,6 +72,28 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         } else {
             Glide.with(mContext).load(ward.getImageURL()).into(holder.profile_image);
         }
+
+        // is Online이 왜 있어야하지?
+//        if(isOnline) {
+//            if(ward.getOnline().equals(true)) {
+//                holder.image_online.setVisibility(View.VISIBLE);
+//                holder.image_offline.setVisibility(View.GONE);
+//            } else {
+//                holder.image_online.setVisibility(View.GONE);
+//                holder.image_offline.setVisibility(View.VISIBLE);
+//            }
+//        } else {
+//            holder.image_online.setVisibility(View.GONE);
+//            holder.image_offline.setVisibility(View.GONE);
+//        }
+        if(ward.getOnline()) {
+            holder.image_online.setVisibility(View.VISIBLE);
+            holder.image_offline.setVisibility(View.GONE);
+        } else {
+            holder.image_online.setVisibility(View.GONE);
+            holder.image_offline.setVisibility(View.VISIBLE);
+        }
+
         holder.chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,13 +106,13 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
                 Intent intent = new Intent(mContext, ChatActivity.class);
                 intent.putExtra("wardId", ward.getId());
                 intent.putExtra("userId", userId);
-                intent.putExtra("isWard", MainActivity.getIsWard());
-                intent.putExtra("loginEmail", MainActivity.getLoginEmail());
-                intent.putExtra("loginPassword", MainActivity.getLoginPassword());
+                intent.putExtra("isWard", "false");
+
+                // 니네 왜 있냐
+//                intent.putExtra("loginEmail", MainActivity.getLoginEmail());
+//                intent.putExtra("loginPassword", MainActivity.getLoginPassword());
 
                 Log.d("WardAdapter", MainActivity.getIsWard());
-                Log.d("WardAdapter", MainActivity.getLoginEmail());
-                Log.d("WardAdapter", MainActivity.getLoginPassword());
 //                Log.d("getLoginUserIdTest", "1. " + ward.getId());
 //                Log.d("getLoginUserIdTest", "2. " + userId);
                 //intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
@@ -123,6 +147,8 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         View rootView;
         public TextView wardName;
         public ImageView profile_image;
+        private ImageView image_online;
+        private ImageView image_offline;
 
         // 약 화면용 - 중요
         public RecyclerView recyclerView;
@@ -136,12 +162,13 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
 
             wardName = itemView.findViewById(R.id.ward_name);
             profile_image = itemView.findViewById(R.id.imageView2);
+            image_online = itemView.findViewById(R.id.image_online);
+            image_offline = itemView.findViewById(R.id.image_offline);
 
             recyclerView = itemView.findViewById(R.id.wardManagementRecyclerView);
             //medicineName = itemView.findViewById(R.id.)
 
             add_medicine_button = itemView.findViewById(R.id.add_medicine_button);
-
             chatButton = itemView.findViewById(R.id.chat_button);
         }
         public void setItem(Ward item) {

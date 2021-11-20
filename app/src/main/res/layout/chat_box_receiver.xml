@@ -20,5 +20,10 @@
         android:background="@drawable/chat_background_receiver"
         android:text="hi"
         android:textColor="@color/black"/>
+    <TextView
+        android:id="@+id/text_seen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="" />
 
 </RelativeLayout>

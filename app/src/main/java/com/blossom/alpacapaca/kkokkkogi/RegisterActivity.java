@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -90,7 +91,7 @@ public class RegisterActivity extends AppCompatActivity {
 //                            hashMap.put("id", userid);
 //                            hashMap.put("username", username);
 //                            hashMap.put("imageURL", "default");
-                            User user = new User(userid, username, email, password, "default");
+                            User user = new User(userid, username, email, password, "default", true);
 
                             //reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>()
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -98,7 +99,7 @@ public class RegisterActivity extends AppCompatActivity {
                                 public void onComplete(@NonNull Task<Void> task) {
                                     if(task.isSuccessful()) {
                                         Toast.makeText(RegisterActivity.this, "가입에 성공했습니다.", Toast.LENGTH_SHORT).show();
-                                        Intent intent = new Intent(RegisterActivity.this, StartActivity.class);
+                                        Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                         startActivity(intent);
                                     }
