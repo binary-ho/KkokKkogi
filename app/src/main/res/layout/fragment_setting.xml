@@ -12,7 +12,7 @@
         android:layout_height="match_parent"
         android:text="설정 설정~"
         android:textColor="@color/black"
-        android:textSize="50sp"
+        android:textSize="30sp"
         android:textStyle="bold"/>
 
 </FrameLayout>

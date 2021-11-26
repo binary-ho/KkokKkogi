@@ -14,8 +14,10 @@
     <color name="gray9">#FF999999</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="colorPrimary">#F2CD87</color>
-    <color name="colorPrimaryDark">#ECB06B</color>
+    <color name="colorPrimary">#fdd94d</color>
+<!--    <color name="colorPrimary">#F2CD87</color>-->
+<!--    <color name="colorPrimaryDark">#ECB06B</color>-->
+    <color name="colorPrimaryDark">#fdd94d</color>
     <color name="colorAccent">#FF4081</color>
     <color name="colorText">#ff008577</color>
 
@@ -23,4 +25,5 @@
     <color name="sky2">#ff95b9f4</color>
     <color name="yellow1">#fdd94d</color>
     <color name="yellow2">#fdd94d</color>
+    <color name="brown1">#7d6b28</color>
 </resources>

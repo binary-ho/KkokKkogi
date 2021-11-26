@@ -29,14 +29,14 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MedicineAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(mContext).inflate(R.layout.medicine_item, parent, false);
-        return new ViewHolder(itemView);
+        return new MedicineAdapter.ViewHolder(itemView);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Medicine medicine = medicines.get(position);
+    public void onBindViewHolder(@NonNull MedicineAdapter.ViewHolder holder, int position) {
+        Medicine medicine = this.medicines.get(position);
         holder.medicine_name.setText(medicine.getName());
         holder.setItem(medicine);
     }
@@ -54,8 +54,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
 
         public ViewHolder(View itemView) {
             super(itemView);
-
-            medicine_name = itemView.findViewById(R.id.medicine_name);
+            medicine_name = itemView.findViewById(R.id.medicine_item_name_box);
             //profile_image = itemView.findViewById(R.id.imageView2);
         }
 
@@ -65,15 +64,15 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
     }
 
     public void addItem(Medicine medicine) {
-        medicines.add(medicine);
+        this.medicines.add(medicine);
     }
-    public void setMedicines(ArrayList<Medicine> medicines) {
-        this.medicines = medicines;
+    public void setMedicines(ArrayList<Medicine> medicine) {
+        this.medicines = medicine;
     }
     public Medicine getItem(int position) {
         return medicines.get(position);
     }
     public void setItem(int position, Medicine medicine) {
-        medicines.set(position, medicine);
+        this.medicines.set(position, medicine);
     }
 }

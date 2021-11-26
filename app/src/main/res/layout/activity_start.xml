@@ -1,40 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/yellow1"
     android:gravity="center"
     android:orientation="vertical"
-    android:background="@color/colorPrimary"
     tools:context=".StartActivity">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="이게 뭐라고 대체"
-        android:textColor="#fff"
-        android:textSize="25sp"
-        android:textStyle="bold" />
 
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+    <ImageView
+        android:id="@+id/start_image"
+        android:layout_width="251.6dp"
+        android:layout_height="228.82dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+
+        android:layout_marginStart="79.22dp"
+        android:layout_marginTop="41.7dp"
+        android:layout_marginEnd="77.18dp"
+
+        android:src="@drawable/chicken_no_background" />
+
+    <ImageButton
         android:id="@+id/login"
-        android:text="로그인"
-        android:layout_marginTop="100dp"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:textColor="#fff"/>
-    <Button
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/register"
-        android:text="회원가입"
-        android:backgroundTint="@color/colorPrimaryDark"
-        android:layout_marginRight="20dp"
-        android:layout_marginLeft="20dp"
-        android:textColor="#fff"/>
+        android:layout_width="304.98dp"
+        android:layout_height="48dp"
 
-</LinearLayout>
+        android:layout_below="@+id/start_image"
+        android:layout_alignParentStart="true"
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="51dp"
+        android:layout_marginTop="81.6dp"
+        android:layout_marginEnd="51dp"
+        android:background="@drawable/login_white"
+        android:contentDescription="button" />
+
+    <ImageButton
+        android:id="@+id/register"
+        android:layout_width="304.98dp"
+        android:layout_height="48dp"
+        android:layout_below="@+id/login"
+        android:layout_alignParentStart="true"
+
+
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="51dp"
+        android:layout_marginTop="24.82dp"
+        android:layout_marginRight="51dp"
+
+        android:background="@drawable/register_white"
+        android:contentDescription="register_button" />
+
+</RelativeLayout>

@@ -6,26 +6,49 @@
     android:layout_height="match_parent"
     tools:context=".useractivity.AddWardActivity" >
 
-    <include
-        android:id="@+id/toolbar"
-        layout="@layout/bar_layout" />
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_activity_chat"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:backgroundTint="@color/colorPrimary"
+            app:navigationIcon="@drawable/my_back_icon"
+            android:theme="@style/Base.ThemeOverlay.AppCompat.Dark.ActionBar"
+            app:popupTheme="@style/MenuStyle">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="가족 등록"
+                android:textSize="20sp"
+                android:textColor="@color/black"
+                android:textStyle="bold" />
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent"
+        android:layout_below="@+id/appbar">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/appbar"
         android:gravity="center_horizontal"
         android:orientation="vertical"
         android:padding="16dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="가족 추가"
-            android:textSize="20sp"
-            android:textStyle="bold" />
 
         <TextView
             android:layout_width="match_parent"
@@ -58,7 +81,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="동명이인 구분 용도 입니다. (20자 제한)"
-            android:textSize="10sp" />
+            android:textSize="10sp"
+            android:inputType="text"/>
 
         <com.rengwuxian.materialedittext.MaterialEditText
             android:id="@+id/name_for_me"
@@ -66,7 +90,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:hint="ex) 쌍문동의 자랑 조상우 (75년생)"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            android:inputType="text" />
 
 
         <TextView
@@ -84,7 +109,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="0dp"
             android:hint="ex) 751121"
-            app:met_floatingLabel="normal" />
+            app:met_floatingLabel="normal"
+            android:inputType="number"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -150,10 +176,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:background="@color/colorPrimaryDark"
+                android:background="@color/yellow1"
                 android:text="가입"
                 android:textColor="#fff"
-                app:backgroundTint="@color/colorPrimaryDark" />
+                app:backgroundTint="@color/yellow1" />
 
         </LinearLayout>
     </ScrollView>

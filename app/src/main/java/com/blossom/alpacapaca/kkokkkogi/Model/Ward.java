@@ -24,7 +24,7 @@ public class Ward {
     private HashMap<String, Chat> chats;
 
     // 약 배열
-    ArrayList<Medicine> medicines;
+    ArrayList<TimeForMedicines> times;
 
     public Ward() {
         // 싹 밀어야 할 수도 있어
@@ -41,7 +41,7 @@ public class Ward {
         this.online = false;
 
         imageURL = "default";
-        this.medicines = new ArrayList<>();
+        this.times = new ArrayList<>();
     }
     // 아이디(받기), 부모아이디(자동), 보여질 이름(받기), 내가 볼 이름(받기), 출생일
     public Ward(String id, String loginEmail, String loginPassword, String parentId, String nameForWard, String nameForMe, String born, HashMap<String, Chat> chats, Boolean online) {
@@ -57,7 +57,7 @@ public class Ward {
         this.chats = chats;
         // this.wardName = name_for_me + " (" + born.substring(0, 2) + "년생)";
         this.imageURL = "default";
-        this.medicines = new ArrayList<>();
+        this.times = new ArrayList<>();
     }
     public String getId() {
         return id;
@@ -111,8 +111,8 @@ public class Ward {
 
     // 약 추가
     public void addMedicine(String str) {
-        if (medicines != null) {
-            medicines.add(new Medicine(str));
+        if (times != null) {
+            times.add(new TimeForMedicines(str));
         }
         else {
             Log.d("Ward", "Empty!");
@@ -121,8 +121,8 @@ public class Ward {
     public static boolean isWard() {
         return isWard;
     }
-    public ArrayList<Medicine> getMedicineArray() { return medicines; }
-    public Medicine getMedicine(int index) { return medicines.get(index); }
+    public ArrayList<TimeForMedicines> getMedicineArray() { return times; }
+    public TimeForMedicines getMedicine(int index) { return times.get(index); }
 
     public int chatsSize() {
         if(this.chats == null) {
@@ -133,17 +133,21 @@ public class Ward {
         }
     }
     public HashMap<String, Chat> getChats() {
-        return chats;
+        return this.chats;
     }
     public String lastMessage() {
         String key = "";
-        if(this.chats != null) {
-            Iterator<String> iterator = chats.keySet().iterator();
+        HashMap<String, Chat> chatss = getChats();
+        if(chatss != null) {
+            Iterator<String> iterator = chatss.keySet().iterator();
             while (iterator.hasNext()) {
                 key = (String) iterator.next();
+                //Log.d("Ward", "laseMessage() 호출: " + chatss.get(key).getMessage());
             }
         }
-        return this.chats.get(key).getMessage();
+        String str = chatss.get(key).getMessage();
+        //Log.d("Ward", "laseMessage() 호출: " + str);
+        return str;
     }
     public void setChats(HashMap<String, Chat> chats) {
         this.chats = chats;

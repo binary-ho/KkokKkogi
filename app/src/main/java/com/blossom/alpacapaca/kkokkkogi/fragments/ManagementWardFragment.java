@@ -133,7 +133,6 @@ public class ManagementWardFragment extends Fragment {
     private void readWards() {
         wardReference = FirebaseDatabase.getInstance().getReference("Users").child(loginUser.getUid()).child("Wards");
 
-
         wardReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
@@ -18,7 +19,8 @@ public class StartActivity extends AppCompatActivity {
 //    private static final String TAG = "Start";
 //    private FirebaseAuth mAuth;
 
-    Button login, register;
+    ImageButton register;
+    ImageButton login;
     FirebaseUser firebaseUser;
 
     @Override

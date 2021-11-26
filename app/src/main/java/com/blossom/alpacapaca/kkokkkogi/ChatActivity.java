@@ -48,9 +48,7 @@ public class ChatActivity extends AppCompatActivity {
     RecyclerView recyclerView;
 
     Intent intent;
-    DatabaseReference referenceUser;
-    DatabaseReference referenceWard;
-    DatabaseReference referenceChat;
+    DatabaseReference referenceUser, referenceWard, referenceChat;
 
     ValueEventListener seenListener;
     Boolean onScreen;

@@ -35,9 +35,6 @@
 
 
             </RelativeLayout>
-
-
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -87,14 +84,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:background="@android:drawable/ic_menu_call" />
+                        android:background="@android:drawable/ic_menu_call"
+                        android:visibility="gone"/>
 
                     <Button
                         android:id="@+id/chat_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_toStartOf="@+id/call_button"
-                        android:background="@android:drawable/sym_action_chat" />
+                        android:background="@android:drawable/sym_action_chat"
+                        android:visibility="gone"/>
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -104,41 +103,66 @@
                         android:id="@+id/list_name"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="[섭취 목록]"
-                        android:textStyle="bold|italic"
+                        android:text="[복약관리]"
+                        android:textStyle="bold"
                         android:textColor="@color/black"
-                        android:textSize="40sp"
+                        android:textSize="30sp"
                         android:layout_alignParentStart="true"/>
 
                     <Button
                         android:id="@+id/add_medicine_button"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        android:layout_marginStart="10dp"
                         android:layout_toEndOf="@+id/list_name"
-                        android:background="@android:drawable/ic_menu_add" />
+                        android:backgroundTint="@color/white"
+                        android:foreground="@drawable/add_circle"
+                        android:foregroundTint="@color/yellow1" />
                 </RelativeLayout>
 
                 <RelativeLayout
-                    android:id="@+id/medicine_box"
+                    android:id="@+id/medicine_by_time_box"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" >
+
                     <LinearLayout
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentTop="true"
-                        android:layout_alignParentBottom="true"
                         android:layout_alignParentStart="true"
+                        android:layout_alignParentTop="true"
                         android:layout_alignParentEnd="true"
+                        android:layout_alignParentBottom="true"
                         android:layout_marginStart="0dp"
                         android:orientation="horizontal">
+
                         <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/wardManagementRecyclerView"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-                        </androidx.recyclerview.widget.RecyclerView>
+                            android:layout_height="wrap_content"></androidx.recyclerview.widget.RecyclerView>
                     </LinearLayout>
                 </RelativeLayout>
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                    <Button
+                        android:id="@+id/call_button2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_alignParentEnd="true"
+                        android:background="@android:drawable/ic_menu_call"
+                        />
+
+                    <Button
+                        android:id="@+id/chat_button2"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+
+                        android:layout_toStartOf="@+id/call_button2"
+                        android:background="@android:drawable/sym_action_chat" />
+                </RelativeLayout>
+
             </LinearLayout>
+
         </LinearLayout>
     </androidx.cardview.widget.CardView>
 </LinearLayout>

@@ -39,22 +39,23 @@ public class AddWardActivity extends AppCompatActivity {
     FirebaseAuth authForWard;
 
     FirebaseUser parent;
-    String parentId;
-    String loginEmail;
-    String loginPassword;
-    DatabaseReference referenceParent;
-    DatabaseReference referenceWard;
-    DatabaseReference referenceBase;
-
+    String parentId, loginEmail, loginPassword;
+    DatabaseReference referenceParent, referenceWard, referenceBase;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_add_ward);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar_activity_chat);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle("친구 등록");
+        getSupportActionBar().setTitle("");
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
         name_for_ward = findViewById(R.id.name_for_ward);
         name_for_me = findViewById(R.id.name_for_me);
@@ -99,6 +100,8 @@ public class AddWardActivity extends AppCompatActivity {
                 }
             }
         });
+
+
     }
 
     private void wardRegister( String email, String password, String parentId, String nameForWard, String nameForMe, String born) {

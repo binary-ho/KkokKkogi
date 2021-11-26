@@ -64,10 +64,10 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@color/colorPrimary"
+        app:backgroundTint="@color/black"
+        app:itemBackground="@color/white"
         app:itemTextColor="@color/white"
-        app:menu="@menu/menu_bottom"
-        app:backgroundTint="@color/colorPrimary"/>
+        app:menu="@menu/menu_bottom" />
     <!--    <com.google.android.material.tabs.TabLayout-->
     <!--        android:id="@+id/tab_layout"-->
     <!--        android:layout_width="match_parent"-->

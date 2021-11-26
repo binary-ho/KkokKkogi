@@ -63,4 +63,7 @@ dependencies {
     // add library
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
+
+    implementation 'joda-time:joda-time:2.10.10'
+    implementation group: 'com.google.guava', name: 'guava', version: '24.1-jre' // # or 23.5-android for the Android flavor
 }

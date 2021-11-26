@@ -14,19 +14,29 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.blossom.alpacapaca.kkokkkogi.useractivity.AddMedicinesActivity;
 import com.bumptech.glide.Glide;
 import com.blossom.alpacapaca.kkokkkogi.ChatActivity;
 import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
-import com.blossom.alpacapaca.kkokkkogi.Model.Medicine;
+import com.blossom.alpacapaca.kkokkkogi.Model.TimeForMedicines;
 import com.blossom.alpacapaca.kkokkkogi.Model.Ward;
 import com.blossom.alpacapaca.kkokkkogi.R;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
 
     private Context mContext;
     private ArrayList<Ward> wards = new ArrayList<>();
+    DatabaseReference referenceMedicine;
 
     private boolean isOnline;
 
@@ -37,14 +47,15 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         this.wards = wards;
         this.isOnline = isOnline;
         userId = MainActivity.getLoginUserId();
+        referenceMedicine = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards");
     }
 
     // 약을 관리하기 위한 부분
     // 싹 갈아 엎어야 할 수도? 얘 자체가 받는 부분이 될 수는 없는걸까
 //    private LinearLayoutManager layoutManager;
 //    private RecyclerView recyclerView;
-    private MedicineAdapter medicineAdapter;
-    private ArrayList<Medicine> mMedicine;
+    private TimesForMedicineAdapter timesForMedicineAdapter;
+    private ArrayList<TimeForMedicines> mTimes;
 
     View rootView;
 
@@ -122,15 +133,52 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
             }
         });
 
+        holder.add_medicine_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, AddMedicinesActivity.class);
+                intent.putExtra("wardId", ward.getId());
+                intent.putExtra("userId", userId);
+                mContext.startActivity(intent);
+            }
+        });
+
         //리사이클 안에 리사이클
-        ArrayList<Medicine> ma = ward.getMedicineArray();
-        ma.clear();
-        ward.addMedicine("1. 타이레놀");
-        ward.addMedicine("2. 감기약");
-        ward.addMedicine("3. 소화제");
-        Log.d("WardAdapter", ma.toString());
-        holder.recyclerView.setAdapter(new MedicineAdapter(mContext, ma));
-        holder.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+        Multimap<String, String> multimap = HashMultimap.create();
+        HashSet<String> keyArray = new HashSet<>();
+        referenceMedicine = referenceMedicine.child(ward.getId()).child("Medicines");
+        referenceMedicine.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                ArrayList<TimeForMedicines> timeAndMedicine = ward.getMedicineArray();
+                timeAndMedicine.clear();
+                for(DataSnapshot key : snapshot.getChildren()) {
+                    // keyArray.add((String) key.key());
+                    String keyString = key.getKey();
+                    String str;
+                    if(keyString.length() == 3) {
+                        str = "0" + keyString.substring(0, 1) + ":" + keyString.substring(1, 3) + " :";
+                    } else {
+                        str = keyString.substring(0, 2) + ":" + keyString.substring(2,4) + " :";
+                    }
+                    for(DataSnapshot value : key.getChildren()){
+                        // multimap.put((String) key.key(), (String) value.getValue());
+                        str += " " + value.getValue() + ",";
+                    }
+                    ward.addMedicine(str.substring(0, str.length() -1));
+                }
+                holder.recyclerView.setAdapter(new TimesForMedicineAdapter(mContext, ward.getMedicineArray()));
+                holder.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //Log.d("WardAdapter", ma.toString());
+
         //
 
         holder.setItem(ward);
@@ -146,15 +194,12 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
     static class ViewHolder extends RecyclerView.ViewHolder {
         View rootView;
         public TextView wardName;
-        public ImageView profile_image;
-        private ImageView image_online;
-        private ImageView image_offline;
+        public ImageView profile_image, image_online, image_offline;
 
         // 약 화면용 - 중요
         public RecyclerView recyclerView;
         //public TextView medicineName;     // 이거 필요한거야?
-        public Button add_medicine_button;
-        public Button chatButton;
+        public Button add_medicine_button, chatButton;
         // 리사이클러 뷰도 추가해야겠네
 
         public ViewHolder(View itemView) {
@@ -169,7 +214,7 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
             //medicineName = itemView.findViewById(R.id.)
 
             add_medicine_button = itemView.findViewById(R.id.add_medicine_button);
-            chatButton = itemView.findViewById(R.id.chat_button);
+            chatButton = itemView.findViewById(R.id.chat_button2);
         }
         public void setItem(Ward item) {
             wardName.setText(item.getNameForMe());

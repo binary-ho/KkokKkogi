@@ -8,6 +8,7 @@
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-hdpi/chat_background_sender.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/item_color.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/medicine_box.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/my_back_icon.xml" value="1.515625" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable-v24/my_white_back_icon.xml" value="1.515625" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/ic_launcher_background.xml" value="0.2526041666666667" />
@@ -15,11 +16,16 @@
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/ic_wards_foreground.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/item_color.xml" value="0.2526041666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/drawable/splash_background_chicken.xml" value="0.2526041666666667" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout-v23/activity_start.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_add_medicines.xml" value="0.30202140309155767" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_add_ward.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_chat.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_login.xml" value="0.13229166666666667" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_main.xml" value="0.23645833333333333" />
-        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_start.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_register.xml" value="0.13229166666666667" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_start.xml" value="0.2" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/activity_ward_main.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/add_medicine_time_item.xml" value="0.22083333333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/bar_layout.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/chat_box_receiver.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/chat_box_sender.xml" value="0.4" />
@@ -35,6 +41,8 @@
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_ward_chat_frgment.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/fragment_ward_main.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/medicine_item.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/register_medicine_time_item.xml" value="0.23645833333333333" />
+        <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/time_for_medicine_item.xml" value="0.21784420289855072" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/layout/ward_item.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/menu/menu.xml" value="0.23645833333333333" />
         <entry key="..\:/Users/Jinho/AndroidStudioProjects/KkokKkogi/app/src/main/res/menu/menu_bottom.xml" value="0.23645833333333333" />
