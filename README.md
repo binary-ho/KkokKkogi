@@ -9,7 +9,7 @@
 많은 인원을 한번에 관리해야하는 복지사 분들이나, 노인, 장애 아동을 꼼꼼히 케어하는데에 어려움을 느끼는 바쁜 보호자 분들을 위해 만들었습니다.
 
 <메인 화면>
-![1스타트](https://user-images.githubusercontent.com/71186266/157550465-5fe66099-b1c0-4753-af1d-3e00274e25f9.jpg){: width="30%" height="30%"}
+![1스타트](https://user-images.githubusercontent.com/71186266/157550465-5fe66099-b1c0-4753-af1d-3e00274e25f9.jpg) {: width="30%" height="30%"}
 
   
   
