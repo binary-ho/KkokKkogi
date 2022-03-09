@@ -20,7 +20,6 @@
 보호자는 간단하게 회원가입이 가능합니다.
 
 
-<img src=".jng" width="480" height="941"/>
 <피보호자 등록>
 ![가족등록전체](https://user-images.githubusercontent.com/71186266/157550441-688f1130-89bc-4401-89d3-165e9a77bb53.jpg){: width="30%" height="30%"}
 
