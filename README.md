@@ -9,34 +9,40 @@
 많은 인원을 한번에 관리해야하는 복지사 분들이나, 노인, 장애 아동을 꼼꼼히 케어하는데에 어려움을 느끼는 바쁜 보호자 분들을 위해 만들었습니다.
 
 <메인 화면>
-![1스타트](https://user-images.githubusercontent.com/71186266/157550465-5fe66099-b1c0-4753-af1d-3e00274e25f9.jpg)  
-  
+<img src="https://user-images.githubusercontent.com/71186266/157550465-5fe66099-b1c0-4753-af1d-3e00274e25f9.jng" width="480" height="941"/>
   
   
   
 <회원가입>
-![회원가입](https://user-images.githubusercontent.com/71186266/157550462-debbf542-a5d1-430f-b28b-ca28e9d8e116.jpg)
+<img src="https://user-images.githubusercontent.com/71186266/157550462-debbf542-a5d1-430f-b28b-ca28e9d8e116.jng" width="480" height="941"/>
+
 보호자는 간단하게 회원가입이 가능합니다.
 
 
+<img src=".jng" width="480" height="941"/>
 <피보호자 등록>
-![가족등록전체](https://user-images.githubusercontent.com/71186266/157550441-688f1130-89bc-4401-89d3-165e9a77bb53.jpg)
+<img src="https://user-images.githubusercontent.com/71186266/157550441-688f1130-89bc-4401-89d3-165e9a77bb53.jng" width="480" height="941"/>
+
 관리가 필요한 피보호자를 등록하세요!
 
-![가족등록이후화면](https://user-images.githubusercontent.com/71186266/157550434-ccb991cb-0643-4e6e-a7d3-9b80391e399f.jpg)
+<img src="https://user-images.githubusercontent.com/71186266/157550434-ccb991cb-0643-4e6e-a7d3-9b80391e399f.jng" width="480" height="941"/>
+
 등록 이후 메인 화면에서 다음과 같이 나타납니다.
 
 <약 등록>
-![약등록](https://user-images.githubusercontent.com/71186266/157550450-fedadc7d-29ce-4c00-8f81-82ec14b456fb.jpg)
+<img src="https://user-images.githubusercontent.com/71186266/157550450-fedadc7d-29ce-4c00-8f81-82ec14b456fb.jng" width="480" height="941"/>
+
 약 등록 버튼을 통해 피보호자가 섭취할 약을 등록합니다.
 약의 섭취 시간들을 모두 설정해주면
 메인화면에서 시간별로 섭취할 약들을 정리해서 보여줍니다
 
 <알람 화면>
-![alarm](https://user-images.githubusercontent.com/71186266/157550430-950fbd89-2b26-4b7e-b896-545de2bca5e0.png)
+<img src="https://user-images.githubusercontent.com/71186266/157550430-950fbd89-2b26-4b7e-b896-545de2bca5e0.jng" width="480" height="941"/>
+
 해당 시간에 피보호자는 다음과 같은 화면을 보게 됩니다
 
-![Screenshot_20211207-214457_KkokKkogi](https://user-images.githubusercontent.com/71186266/157550431-e2f0714c-1b00-4bbd-ab33-aab353898012.jpg)
+<img src="https://user-images.githubusercontent.com/71186266/157550431-e2f0714c-1b00-4bbd-ab33-aab353898012.jng" width="480" height="941"/>
+
 알람 끄기를 누른 다음 간단하게 약을 먹었는지 체크할 수 있고,
 이는 실시간으로 보호자 화면에서 확인 가능합니다.
 
