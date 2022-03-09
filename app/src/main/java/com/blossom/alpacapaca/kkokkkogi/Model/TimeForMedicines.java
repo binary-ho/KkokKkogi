@@ -2,9 +2,36 @@ package com.blossom.alpacapaca.kkokkkogi.Model;
 
 public class TimeForMedicines {
     String time;
+    String hour;
+    String min;
+    String state;
+    String userId;
 
-    public TimeForMedicines(String time) {
+    public String getUserId() {
+        return userId;
+    }
+
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public String getWardId() {
+        return wardId;
+    }
+
+    public void setWardId(String wardId) {
+        this.wardId = wardId;
+    }
+
+    String wardId;
+
+    public TimeForMedicines(String time, String hour, String min, String user, String ward) {
         this.time = time;
+        this.hour = hour;
+        this.min = min;
+        this.userId = user;
+        this.wardId = ward;
+        state = "false";
     }
 
 
@@ -31,4 +58,35 @@ public class TimeForMedicines {
 //    public void deleteTime(int index) {
 //        this.times.remove(index);
 //    }
+public String getHour() {
+    return hour;
+}
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
+    public String getMin() {
+        return min;
+    }
+
+    public void setMin(String min) {
+        this.min = min;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public void stateTrue() {
+        this.state = "true";
+    }
+
+    public void stateFalse() {
+        this.state = "false";
+    }
 }

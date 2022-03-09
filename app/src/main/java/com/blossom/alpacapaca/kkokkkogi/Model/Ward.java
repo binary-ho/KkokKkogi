@@ -18,6 +18,10 @@ public class Ward {
     private String imageURL;
     private Boolean online;
 
+
+
+    private String lastOnline;
+
     private static boolean isWard;
 
     // fuck
@@ -28,13 +32,13 @@ public class Ward {
 
     public Ward() {
         // 싹 밀어야 할 수도 있어
-        this.id = getId();
-        this.loginEmail = getLoginEmail();
-        this.loginPassword = getLoginPassword();
-        this.parentId = getParentId();
-        this.nameForWard = getNameForWard();
-        this.nameForMe = getNameForMe();
-        this.born = getBorn();
+        this.id = "";
+        this.loginEmail = "";
+        this.loginPassword = "";
+        this.parentId = "";
+        this.nameForWard = "";
+        this.nameForMe = "";
+        this.born = "";
         //this.chats = new ArrayList<>();
         this.chats = new HashMap<String, Chat>();
         isWard = true;
@@ -58,6 +62,7 @@ public class Ward {
         // this.wardName = name_for_me + " (" + born.substring(0, 2) + "년생)";
         this.imageURL = "default";
         this.times = new ArrayList<>();
+        this.lastOnline = "첫 로그인 이전";
     }
     public String getId() {
         return id;
@@ -110,20 +115,21 @@ public class Ward {
     }
 
     // 약 추가
-    public void addMedicine(String str) {
+    public void addMedicine(String str, String hour, String min, String userId, String wardId) {
         if (times != null) {
-            times.add(new TimeForMedicines(str));
+            times.add(new TimeForMedicines(str, hour, min, userId, wardId));
         }
         else {
             Log.d("Ward", "Empty!");
         }
     }
+    public ArrayList<TimeForMedicines> getMedicineArray() { return times; }
+    public void resetMedicineArray() { this.times.clear(); }
+    public TimeForMedicines getMedicine(int index) { return times.get(index); }
+
     public static boolean isWard() {
         return isWard;
     }
-    public ArrayList<TimeForMedicines> getMedicineArray() { return times; }
-    public TimeForMedicines getMedicine(int index) { return times.get(index); }
-
     public int chatsSize() {
         if(this.chats == null) {
             return 0;
@@ -159,6 +165,17 @@ public class Ward {
 
     public void setOnline(Boolean online) {
         this.online = online;
+    }
+    public String getLastOnline() {
+        return lastOnline;
+    }
+
+    public void setLastOnline(String time) {
+        lastOnline = time;
+    }
+
+    public void renewLastOnline() {
+        this.lastOnline = String.valueOf(System.currentTimeMillis());
     }
 }
 

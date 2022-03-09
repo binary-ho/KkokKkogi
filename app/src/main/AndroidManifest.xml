@@ -2,6 +2,11 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.blossom.alpacapaca.kkokkkogi">
 
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_chicken"
@@ -9,6 +14,23 @@
         android:roundIcon="@mipmap/ic_chicken_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.KkokKkogi">
+        <service
+            android:name=".ResetService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".useractivity.SetChattingTimeActivity"
+            android:exported="true" />
+
+        <service
+            android:name=".AlarmService"
+            android:enabled="true"
+            android:exported="true" />
+
+        <activity
+            android:name=".wardactivity.WardAlarmActivity"
+            android:exported="true" />
         <activity
             android:name=".useractivity.AddMedicinesActivity"
             android:exported="true" />
@@ -16,7 +38,7 @@
             android:name=".ChatActivity"
             android:exported="true" />
         <activity
-            android:name=".wardacrivity.WardMainActivity"
+            android:name=".wardactivity.WardMainActivity"
             android:exported="true" />
         <activity
             android:name=".useractivity.AddWardActivity"
@@ -45,6 +67,15 @@
         <activity
             android:name=".StartActivity"
             android:exported="true" />
+
+        <receiver
+            android:name=".AlertReceiver"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.INPUT_METHOD_CHANGED" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

@@ -9,8 +9,7 @@ import android.widget.TextView;
 import androidx.fragment.app.Fragment;
 
 import com.blossom.alpacapaca.kkokkkogi.R;
-import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
-import com.blossom.alpacapaca.kkokkkogi.wardacrivity.WardMainActivity;
+import com.blossom.alpacapaca.kkokkkogi.wardactivity.WardMainActivity;
 
 
 public class WardMainFragment extends Fragment {

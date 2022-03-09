@@ -104,8 +104,6 @@ public class AddMedicinesActivity extends AppCompatActivity {
         add_medicine_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Log.d("AddMedicineTest", "button click 1. " + medicineName.getText().toString());
-                //Log.d("AddMedicineTest", "button click 2. " + times.size());
                 registerMedicineAndTimes(medicineName.getText().toString(), times);
             }
         });
@@ -135,40 +133,34 @@ public class AddMedicinesActivity extends AppCompatActivity {
 
     // 의문점: 등록 될 때도 맵으로 등록되나? 그러니까 가져와서 겹치는 것이 있는지 확인하는 과정 없이, 그냥 푸쉬한다면 어떻게 되는 걸까?
     public void registerMedicineAndTimes(String name, ArrayList<HourMin> timesForRegister) {
-        // 일단 데이터 읽어오기
+        // 데이터 읽어오기
         Multimap<String, String> multimap = HashMultimap.create();
         HashSet<String> keyArray = new HashSet<>();
         referenceMedicine.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                // 데이타 읽기
                 for(DataSnapshot key : snapshot.getChildren()) {
                     keyArray.add((String) key.getKey());
                     for(DataSnapshot value : key.getChildren()){
                         multimap.put((String) key.getKey(), (String) value.getValue());
-//                        Log.d("AddMedicineTest", "멀티맵 읽기 " + key.getKey() + ", " + value.getValue() );
                     }
                 }
 
-                // 이제부터 등록이란다.
+                // 이제부터 등록.
                 if(keyArray == null || multimap == null) {
 //                    Log.d("AddMedicineTest", "등록 실패!");
                 } else {
-//                    Log.d("AddMedicineTest", "등록 해보자!");
                     ArrayList<String> valueArray;
                     for(HourMin time: timesForRegister) {
                         String hourMin = time.getTimeString();
-                        //referenceMedicine.child(hourMin).setValue(name);
                         keyArray.add(hourMin);
                         multimap.put(hourMin, name);
-//                        Log.d("AddMedicineTest", "첫 루프 1. " + hourMin );
-//                        Log.d("AddMedicineTest", "첫 루프 2. " + keyArray.size());
                     }
                     for (Iterator<String> iterator = keyArray.iterator(); iterator.hasNext(); ) {
                         String key = iterator.next();
-//                        Log.d("AddMedicineTest", "두 번쨰 루프 1. " + key.toString());
                         valueArray = new ArrayList<>(multimap.get(key));
                         referenceMedicine.child(key).setValue(valueArray);
+                        referenceUser.child("Wards").child(wardId).child("MedicinesState").child(key).setValue("false");
                     }
                 }
                 Toast.makeText(getApplicationContext(), "약 추가 성공", Toast.LENGTH_SHORT).show();

@@ -86,14 +86,7 @@ public class RegisterActivity extends AppCompatActivity {
                             String userid = firebaseUser.getUid();
                             reference = FirebaseDatabase.getInstance().getReference("Users").child(userid);
 
-                            // 정보 담을 해쉬맵이에요
-//                            HashMap<String, String> hashMap = new HashMap<>();
-//                            hashMap.put("id", userid);
-//                            hashMap.put("username", username);
-//                            hashMap.put("imageURL", "default");
                             User user = new User(userid, username, email, password, "default", true);
-
-                            //reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>()
                             reference.setValue(user).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {

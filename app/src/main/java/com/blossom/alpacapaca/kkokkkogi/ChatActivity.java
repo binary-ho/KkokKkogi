@@ -15,8 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.blossom.alpacapaca.kkokkkogi.Model.User;
-import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
-import com.blossom.alpacapaca.kkokkkogi.wardacrivity.WardMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -171,7 +169,8 @@ public class ChatActivity extends AppCompatActivity {
     private void sendMessage(String sender, String receiver, String message) {
         Chat chat = new Chat(sender, receiver, message, false);
         //referenceMassage.child("chats").push().setValue(hashMap);
-        referenceChat.push().setValue(chat);
+        //referenceChat.push().setValue(chat);
+        referenceChat.child(String.valueOf(System.currentTimeMillis())).setValue(chat);
 
     }
 

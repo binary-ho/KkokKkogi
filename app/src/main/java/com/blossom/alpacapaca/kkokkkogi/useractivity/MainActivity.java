@@ -1,9 +1,15 @@
 package com.blossom.alpacapaca.kkokkkogi.useractivity;
 
+import static java.lang.Integer.parseInt;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,8 +18,10 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.blossom.alpacapaca.kkokkkogi.AlarmService;
 import com.blossom.alpacapaca.kkokkkogi.Model.User;
 import com.blossom.alpacapaca.kkokkkogi.R;
+import com.blossom.alpacapaca.kkokkkogi.ResetService;
 import com.blossom.alpacapaca.kkokkkogi.StartActivity;
 import com.blossom.alpacapaca.kkokkkogi.fragments.ChatPreviewFragment;
 import com.blossom.alpacapaca.kkokkkogi.fragments.ManagementWardFragment;
@@ -27,6 +35,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Calendar;
 import java.util.HashMap;
 
 import de.hdodenhof.circleimageview.CircleImageView;
@@ -86,9 +95,9 @@ public class MainActivity extends AppCompatActivity {
                 loginEmail = user.getLoginEmail();
                 loginPassword = user.getLoginPassword();
                 loginUserName = user.getUsername();
-                Log.d("MainActivityTest", "로그인 이메일: " + loginEmail);
-                Log.d("MainActivityTest", "로그인 패스워드: " + loginPassword);
-                Log.d("MainActivityTest", "로그인 유저 이름: " + loginUserName);
+                //Log.d("MainActivityTest", "로그인 이메일: " + loginEmail);
+                //Log.d("MainActivityTest", "로그인 패스워드: " + loginPassword);
+                //Log.d("MainActivityTest", "로그인 유저 이름: " + loginUserName);
             }
 
             @Override
@@ -102,8 +111,8 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
-        Toast.makeText(MainActivity.this, loginUserId+ "로 로그인", Toast.LENGTH_SHORT).show();
-        Toast.makeText(MainActivity.this, "CurrentUser = \n" + FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, loginUserId+ "로 로그인", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(MainActivity.this, "CurrentUser = \n" + FirebaseAuth.getInstance().getCurrentUser().getUid(), Toast.LENGTH_SHORT).show();
 
         // 계정 만들어준 이후 오류뜨는지 확인해봐야함. onCreate 할때 해주는게 맞나 고민
 
@@ -181,6 +190,8 @@ public class MainActivity extends AppCompatActivity {
 //        viewPagerAdapter.addFragment(new SettingFragment(), "설정");
 //        viewPager2.setAdapter(viewPagerAdapter);
 //        bottomNavigationView.view
+
+
     }
 
     // 뷰페이저 뒤로가기 눌렸을 때
@@ -209,7 +220,7 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout:
-                Toast.makeText(MainActivity.this, FirebaseAuth.getInstance().getUid() + " sign out!", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(MainActivity.this, FirebaseAuth.getInstance().getUid() + " sign out!", Toast.LENGTH_SHORT).show();
                 FirebaseAuth.getInstance().signOut();
                 Intent logoutIntent = new Intent(MainActivity.this, StartActivity.class);
                 logoutIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);

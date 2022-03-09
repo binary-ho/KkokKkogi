@@ -3,14 +3,13 @@ package com.blossom.alpacapaca.kkokkkogi;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageButton;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.app.AppCompatDelegate;
 
 import com.blossom.alpacapaca.kkokkkogi.useractivity.MainActivity;
-import com.blossom.alpacapaca.kkokkkogi.wardacrivity.WardMainActivity;
+import com.blossom.alpacapaca.kkokkkogi.wardactivity.WardMainActivity;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 

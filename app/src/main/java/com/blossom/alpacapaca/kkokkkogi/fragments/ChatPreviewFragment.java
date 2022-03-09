@@ -59,7 +59,28 @@ public class ChatPreviewFragment extends Fragment {
         loginUser = FirebaseAuth.getInstance().getCurrentUser();
         loginId = loginUser.getUid();
         reference = FirebaseDatabase.getInstance().getReference("Users").child(loginId).child("Wards");
-        readChat2(reference);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshots) {
+                chatPreviewList.clear();
+                Log.d("ChatPreview", "renew!");
+                for(DataSnapshot snapshot: snapshots.getChildren()) {
+                    Ward ward = snapshot.getValue(Ward.class);
+                    if(ward.chatsSize() != 0) {
+                        chatPreviewList.add(ward);
+                    }
+                }
+                adapter = new ChatPreviewAdapter(getContext(), chatPreviewList);
+                recyclerView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+        //readChat2(reference);
         return rootView;
     }
 
@@ -70,10 +91,10 @@ public class ChatPreviewFragment extends Fragment {
         if(title != null) {
             title.setText("대화");
         }
-        Toast.makeText(getContext(), "onResume() 실행", Toast.LENGTH_SHORT).show();
-        if(reference!=null){
-            readChat2(reference);
-        }
+//        Toast.makeText(getContext(), "onResume() 실행", Toast.LENGTH_SHORT).show();
+//        if(reference!=null){
+//            readChat2(reference);
+//        }
     }
     // 두 가지 방법으로 데이터 불러오기 테스트
     // 기존 방식

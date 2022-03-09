@@ -7,12 +7,26 @@ public class HourMin {
 
 
     String timeString;
+    String hourStr;
+    String minStr;
 
     public HourMin() {}
     public HourMin(int hour, int min) {
         this.hour = hour;
         this.min = min;
-        timeString = String.valueOf(hour) + String.valueOf(min);
+        if(hour < 10) {
+            hourStr = "0";
+        } else {
+            hourStr = "";
+        }
+        hourStr += String.valueOf(hour);
+        if(min < 10) {
+            minStr = "0";
+        } else {
+            minStr = "";
+        }
+        minStr += String.valueOf(min);
+        timeString =  hourStr + minStr;
     }
 
     public int getHour() {
@@ -33,5 +47,10 @@ public class HourMin {
     public String getTimeString() {
         return timeString;
     }
-
+    public String getHourString() {
+        return hourStr;
+    }
+    public String getMinString() {
+        return minStr;
+    }
 }

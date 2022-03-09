@@ -68,7 +68,7 @@ public class AddWardActivity extends AppCompatActivity {
         parentId = intent.getStringExtra("loginUserId");
         loginEmail = intent.getStringExtra("loginEmail");
         loginPassword = intent.getStringExtra("loginPassword");
-        Toast.makeText(AddWardActivity.this, parentId + "로 로그인", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(AddWardActivity.this, parentId + "로 로그인", Toast.LENGTH_SHORT).show();
 
         //parent = FirebaseAuth.getInstance().getCurrentUser();
 //        parentInfo = new MainActivity();
@@ -76,7 +76,7 @@ public class AddWardActivity extends AppCompatActivity {
 //        parentId = parentInfo.getUserId();
 //        Log.d("AddWard", parentId);
         referenceParent = FirebaseDatabase.getInstance().getReference("Users").child(parentId);
-        referenceBase = FirebaseDatabase.getInstance().getReference("Wards");
+        //referenceBase = FirebaseDatabase.getInstance().getReference("Wards");
         authForWard = FirebaseAuth.getInstance();
 
         button = findViewById(R.id.button_register);
@@ -112,23 +112,21 @@ public class AddWardActivity extends AppCompatActivity {
                         if(task.isSuccessful()) {
                             FirebaseUser FirebaseWard = authForWard.getCurrentUser();
                             UserProfileChangeRequest profileUpdates = new UserProfileChangeRequest.Builder()
-                                    .setDisplayName("Ward")
+                                    .setDisplayName(parentId)
                                     .build();
                             FirebaseWard.updateProfile(profileUpdates);
 
                             String wardId = FirebaseWard.getUid();
-                            Toast.makeText(AddWardActivity.this, wardId + "로 만들어짐!", Toast.LENGTH_SHORT).show();
                             Log.d("AddWardActivity", wardId + "로 ward 생성");
-                            //referenceWard = referenceParent.getDatabase().getReference("Ward").child(wardId);
 
                             referenceWard = referenceParent.child("Wards").child(wardId);
 
-                            //ArrayList<Chat> chats = new ArrayList<>();
                             HashMap<String, Chat> chats = new HashMap<String, Chat>();
                             Ward ward = new Ward(wardId, email, password, parentId, nameForWard, nameForMe, born, chats, false);
-                            referenceBase = referenceBase.child(wardId);
-                            referenceBase.setValue(parentId);
-                            //reference.setValue(hashmap).addOnCompleteListener(new OnCompleteListener<Void>()
+
+                            // 개선된 방식으로 아래 두 줄 삭제 데이터 공간 덜 쓰게 될듯!
+//                            referenceBase = referenceBase.child(wardId);
+//                            referenceBase.setValue(parentId);
                             referenceWard.setValue(ward).addOnCompleteListener(new OnCompleteListener<Void>() {
                                 @Override
                                 public void onComplete(@NonNull Task<Void> task) {
@@ -145,14 +143,14 @@ public class AddWardActivity extends AppCompatActivity {
                                                 if(task.isSuccessful()) {
                                                     Log.d("AddWardActivity", authForWard.getUid() + "로 재로그인");
                                                 } else {
-                                                    Toast.makeText(AddWardActivity.this, "경고: 재로그인 실패", Toast.LENGTH_SHORT).show();
+                                                    //Toast.makeText(AddWardActivity.this, "경고: 재로그인 실패", Toast.LENGTH_SHORT).show();
                                                 }
                                             }
                                         });
                                         finish();
                                     }
                                     else {
-                                        Toast.makeText(AddWardActivity.this, "실패", Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(AddWardActivity.this, "실패", Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });

@@ -39,6 +39,7 @@ public class MedicineAdapter extends RecyclerView.Adapter<MedicineAdapter.ViewHo
         Medicine medicine = this.medicines.get(position);
         holder.medicine_name.setText(medicine.getName());
         holder.setItem(medicine);
+        //holder.medicine_name.setback
     }
 
     @Override

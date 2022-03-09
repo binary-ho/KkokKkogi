@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.TextClock;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -84,6 +85,8 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
             Glide.with(mContext).load(ward.getImageURL()).into(holder.profile_image);
         }
 
+        //holder.textClock.setTimeZone(String.valueOf(System.currentTimeMillis()));
+
         // is Online이 왜 있어야하지?
 //        if(isOnline) {
 //            if(ward.getOnline().equals(true)) {
@@ -97,13 +100,16 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
 //            holder.image_online.setVisibility(View.GONE);
 //            holder.image_offline.setVisibility(View.GONE);
 //        }
+
         if(ward.getOnline()) {
             holder.image_online.setVisibility(View.VISIBLE);
             holder.image_offline.setVisibility(View.GONE);
         } else {
             holder.image_online.setVisibility(View.GONE);
             holder.image_offline.setVisibility(View.VISIBLE);
+            //holder.textClock.setFormat24Hour(String.valueOf(System.currentTimeMillis()));
         }
+        holder.textClock.setText(ward.getLastOnline());
 
         holder.chatButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -144,28 +150,36 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         });
 
         //리사이클 안에 리사이클
-        Multimap<String, String> multimap = HashMultimap.create();
-        HashSet<String> keyArray = new HashSet<>();
-        referenceMedicine = referenceMedicine.child(ward.getId()).child("Medicines");
+        referenceMedicine = FirebaseDatabase.getInstance().getReference("Users").child(userId).child("Wards").child(ward.getId()).child("Medicines");
         referenceMedicine.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                ArrayList<TimeForMedicines> timeAndMedicine = ward.getMedicineArray();
-                timeAndMedicine.clear();
+                Log.d("WardAdapter", ward.getNameForMe() + " is now renew");
+
+                //ArrayList<TimeForMedicines> timeAndMedicine = ward.getMedicineArray();
+//                ArrayList<TimeForMedicines> timeAndMedicine = new ArrayList<>();
+//                timeAndMedicine.clear();
+                ward.resetMedicineArray();
                 for(DataSnapshot key : snapshot.getChildren()) {
                     // keyArray.add((String) key.key());
                     String keyString = key.getKey();
-                    String str;
+                    String timeHourMin;
+                    String hour;
+                    String min;
                     if(keyString.length() == 3) {
-                        str = "0" + keyString.substring(0, 1) + ":" + keyString.substring(1, 3) + " :";
+                        hour = "0" + keyString.substring(0, 1);
+                        min = keyString.substring(1, 3);
+                        timeHourMin = hour + ":" + min + " :";
                     } else {
-                        str = keyString.substring(0, 2) + ":" + keyString.substring(2,4) + " :";
+                        hour = keyString.substring(0, 2);
+                        min = keyString.substring(2,4);
+                        timeHourMin = hour + ":" + min + " :";
                     }
                     for(DataSnapshot value : key.getChildren()){
                         // multimap.put((String) key.key(), (String) value.getValue());
-                        str += " " + value.getValue() + ",";
+                        timeHourMin += " " + value.getValue() + ",";
                     }
-                    ward.addMedicine(str.substring(0, str.length() -1));
+                    ward.addMedicine(timeHourMin.substring(0, timeHourMin.length() -1),hour,min, ward.getParentId(), ward.getId());
                 }
                 holder.recyclerView.setAdapter(new TimesForMedicineAdapter(mContext, ward.getMedicineArray()));
                 holder.recyclerView.setLayoutManager(new LinearLayoutManager(mContext, LinearLayoutManager.VERTICAL, false));
@@ -180,7 +194,6 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         //Log.d("WardAdapter", ma.toString());
 
         //
-
         holder.setItem(ward);
     }
 
@@ -195,7 +208,7 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
         View rootView;
         public TextView wardName;
         public ImageView profile_image, image_online, image_offline;
-
+        public TextView textClock;
         // 약 화면용 - 중요
         public RecyclerView recyclerView;
         //public TextView medicineName;     // 이거 필요한거야?
@@ -209,6 +222,8 @@ public class WardAdapter extends RecyclerView.Adapter<WardAdapter.ViewHolder>{
             profile_image = itemView.findViewById(R.id.imageView2);
             image_online = itemView.findViewById(R.id.image_online);
             image_offline = itemView.findViewById(R.id.image_offline);
+
+            textClock = itemView.findViewById(R.id.text_clock);
 
             recyclerView = itemView.findViewById(R.id.wardManagementRecyclerView);
             //medicineName = itemView.findViewById(R.id.)

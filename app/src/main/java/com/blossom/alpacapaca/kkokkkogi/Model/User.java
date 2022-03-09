@@ -9,6 +9,11 @@ public class User {
     private String loginEmail;
     private String loginPassword;
 
+    private String startHour;
+    private String startMin;
+    private String endHour;
+    private String endMin;
+
     //private int numWard;
     private static boolean isWard;
 
@@ -22,6 +27,10 @@ public class User {
         isWard = false;
         //this.isWard = new IsWard(true);
         this.online = online;
+        this.startHour = "09";
+        this.startMin = "00";
+        this.endHour = "18";
+        this.endMin = "00";
     }
     public User() {}
     public String getId() {
@@ -72,6 +81,36 @@ public class User {
     public void setOnline(Boolean online) {
         this.online = online;
     }
+    public String getStartHour() {
+        return startHour;
+    }
 
+    public void setStartHour(String startHour) {
+        this.startHour = startHour;
+    }
+
+    public String getStartMin() {
+        return startMin;
+    }
+
+    public void setStartMin(String startMin) {
+        this.startMin = startMin;
+    }
+
+    public String getEndHour() {
+        return endHour;
+    }
+
+    public void setEndHour(String endHour) {
+        this.endHour = endHour;
+    }
+
+    public String getEndMin() {
+        return endMin;
+    }
+
+    public void setEndMin(String endMin) {
+        this.endMin = endMin;
+    }
 
 }

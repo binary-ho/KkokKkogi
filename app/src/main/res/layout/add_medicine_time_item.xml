@@ -25,12 +25,11 @@
 
         <Button
             android:id="@+id/time_delete"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="end|right"
             android:foreground="@drawable/delete_button"
             android:foregroundTint="@android:color/holo_red_light"
             android:backgroundTint="@color/white" />
     </androidx.cardview.widget.CardView>
-
 </LinearLayout>

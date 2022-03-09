@@ -1,19 +1,36 @@
 package com.blossom.alpacapaca.kkokkkogi.adapter;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.ColorFilter;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.viewpager.widget.PagerTitleStrip;
 
 import com.blossom.alpacapaca.kkokkkogi.Model.Medicine;
 import com.blossom.alpacapaca.kkokkkogi.Model.TimeForMedicines;
+import com.blossom.alpacapaca.kkokkkogi.Model.User;
 import com.blossom.alpacapaca.kkokkkogi.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class TimesForMedicineAdapter extends RecyclerView.Adapter<TimesForMedicineAdapter.ViewHolder>{
 
@@ -39,11 +56,42 @@ public class TimesForMedicineAdapter extends RecyclerView.Adapter<TimesForMedici
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         TimeForMedicines timeForMedicines = this.times.get(position);
         holder.time.setText(timeForMedicines.getTime());
-        holder.setItem(timeForMedicines);
+
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users").child(timeForMedicines.getUserId())
+                .child("Wards").child(timeForMedicines.getWardId()).child("MedicinesState")
+                .child(timeForMedicines.getHour()+timeForMedicines.getMin());
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(System.currentTimeMillis());
+        calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeForMedicines.getHour()));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(timeForMedicines.getMin()));
+
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (System.currentTimeMillis() > calendar.getTimeInMillis()) {
+                    String state = snapshot.getValue(String.class);
+                    if(state.equals("false")) {
+                        holder.scrollView.setBackgroundColor(Color.parseColor("#44ff0000"));
+                    } else {
+                        holder.scrollView.setBackgroundColor(Color.parseColor("#4405df29"));
+                    }
+                } else {
+                    holder.scrollView.setBackgroundColor(Color.parseColor("#FFFFFFFF"));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+        //holder.time.setHighlightColor(Color.parseColor("#fdd94d"));
+
 
         ArrayList<Medicine> medicines = new ArrayList<>();
         medicines.clear();
-        medicines.add(new Medicine("타이레놀"));
+        medicines.add(new Medicine("타이레놀", "12", "00"));
     }
 
     @Override
@@ -54,11 +102,15 @@ public class TimesForMedicineAdapter extends RecyclerView.Adapter<TimesForMedici
         return 0;
     }
 
+    @Override
+    public void onViewRecycled(@NonNull ViewHolder holder) {
+        super.onViewRecycled(holder);
+    }
+
     static class ViewHolder extends RecyclerView.ViewHolder {
         public TextView time;
-
-
         public RecyclerView recyclerView;
+        public HorizontalScrollView scrollView;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -66,6 +118,7 @@ public class TimesForMedicineAdapter extends RecyclerView.Adapter<TimesForMedici
             time = itemView.findViewById(R.id.time_for_medicine_text);
             //profile_image = itemView.findViewById(R.id.imageView2);
             recyclerView = itemView.findViewById(R.id.medicine_recycler_view);
+            scrollView = itemView.findViewById(R.id.scroll_view_for_medicine);
         }
 
         public void setItem(TimeForMedicines timeForMedicines) {
