@@ -9,7 +9,7 @@
 많은 인원을 한번에 관리해야하는 복지사 분들이나, 노인, 장애 아동을 꼼꼼히 케어하는데에 어려움을 느끼는 바쁜 보호자 분들을 위해 만들었습니다.
 
 <메인 화면>
-![1스타트](https://user-images.githubusercontent.com/71186266/157550465-5fe66099-b1c0-4753-af1d-3e00274e25f9.jpg) {: width="30%" height="30%"}
+![1스타트](https://user-images.githubusercontent.com/71186266/157550465-5fe66099-b1c0-4753-af1d-3e00274e25f9.jpg){: width="30%" height="30%"}
 
   
   
@@ -21,7 +21,7 @@
 
 
 <피보호자 등록>
-![가족등록전체](https://user-images.githubusercontent.com/71186266/157550441-688f1130-89bc-4401-89d3-165e9a77bb53.jpg){: width="30%" height="30%"}
+![가족등록전체](https://user-images.githubusercontent.com/71186266/157550441-688f1130-89bc-4401-89d3-165e9a77bb53.png){: width="30%" height="30%"}
 
 관리가 필요한 피보호자를 등록하세요!
 
