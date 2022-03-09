@@ -37,6 +37,7 @@
 메인화면에서 시간별로 섭취할 약들을 정리해서 보여줍니다
 
 <알람 화면>
+
 ![alarm](https://user-images.githubusercontent.com/71186266/157550430-950fbd89-2b26-4b7e-b896-545de2bca5e0.png)
 
 해당 시간에 피보호자는 다음과 같은 화면을 보게 됩니다
