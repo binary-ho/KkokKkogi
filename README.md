@@ -9,16 +9,16 @@
 
 ## 1. 메인 화면
 
-<img src="https://user-images.githubusercontent.com/71186266/157553114-00a5305b-dd24-4cc5-bdaf-b589dc869b97.png" width=30%>
+<img src="https://user-images.githubusercontent.com/71186266/157553114-00a5305b-dd24-4cc5-bdaf-b589dc869b97.png" width=40%>
 
   
   
   
 ## 2. 회원가입
-<img src="https://user-images.githubusercontent.com/71186266/157553137-7806bd34-1743-419f-a64e-2171e134112b.png" width=30%>
+<img src="https://user-images.githubusercontent.com/71186266/157553137-7806bd34-1743-419f-a64e-2171e134112b.png" width=40%>
 
 
-보호자는 간단하게 회원가입이 가능합니다.
+**보호자는 간단한 과정을 통해 회원가입이 가능합니다.**
 
 
 ## 3. 피보호자 등록
@@ -32,23 +32,30 @@
 
 
 ## 4. 약 등록
-![약등록](https://user-images.githubusercontent.com/71186266/157553130-3c834ff6-a55e-4a0d-a051-931b664aca4e.png)
+<img src="https://user-images.githubusercontent.com/71186266/157553130-3c834ff6-a55e-4a0d-a051-931b664aca4e.png" width=40%>
 
-약 등록 버튼을 통해 피보호자가 섭취할 약을 등록합니다.
+**약 등록 버튼을 통해 피보호자가 섭취할 약을 등록합니다.** <br>
 약의 섭취 시간들을 모두 설정해주면
 메인화면에서 시간별로 섭취할 약들을 정리해서 보여줍니다
 
 ## 5. 알람 화면
 <div>
-<img src="https://user-images.githubusercontent.com/71186266/157553118-a8fc3398-1e3d-4e99-ac7e-e02645c080bf.png" width=40%>
-<img src="https://user-images.githubusercontent.com/71186266/157553122-774446f5-09ad-48e9-9860-e3a6bbc16723.png" width=40%>
+  <img src="https://user-images.githubusercontent.com/71186266/157553118-a8fc3398-1e3d-4e99-ac7e-e02645c080bf.png" width=40%>
+  <img src="https://user-images.githubusercontent.com/71186266/157553122-774446f5-09ad-48e9-9860-e3a6bbc16723.png" width=40%>
 </div>
 
-해당 시간에 피보호자는 왼쪽과 같은 화면을 보게 됩니다. <br>
+**해당 시간에 피보호자는 왼쪽과 같은 알람 화면을 보게 됩니다.** 
+
+<br>
+
 알람 끄기를 누른 다음 간단하게 약을 먹었는지 체크할 수 있고,
-이는 오른쪽 화면과 같이 실시간으로 보호자 화면에서 확인 가능합니다.
+이는 오른쪽 화면과 같이 실시간으로 보호자 화면에서 확인 가능합니다. <br>
 
 ## 6. 채팅 화면
-보호자와 피보호자는 서로 편하게 채팅 할 수 있습니다! 이를 통해 보호자는 번호 노출 없이 소통할 수 있게 됩니다!
-<img src="https://user-images.githubusercontent.com/71186266/157553133-ad74e811-6668-433d-a1cd-aa76445cccef.png" width=30%>
+**보호자와 피보호자는 서로 편하게 채팅 할 수 있습니다!** 이를 통해 보호자는 번호 노출 없이 소통할 수 있게 됩니다! <br> <br>
+
+<img src="https://user-images.githubusercontent.com/71186266/157553133-ad74e811-6668-433d-a1cd-aa76445cccef.png" width=40%>
+
+<br>
+
 이외에도 채팅 가능 시간 설정, 피보호자의 마지막 접속 시간, 현재 활동중 여부 등의 기능이 있습니다.
