@@ -22,12 +22,14 @@
 
 
 ## 3. 피보호자 등록
-<img src="https://user-images.githubusercontent.com/71186266/157553128-95a93438-56b9-489f-8fc1-f35e7e5de11e.png" width=30%>
+<div>
+  <img src="https://user-images.githubusercontent.com/71186266/157553128-95a93438-56b9-489f-8fc1-f35e7e5de11e.png" width=40%>
+  <img src="https://user-images.githubusercontent.com/71186266/157553125-e4cedf37-71fd-4bf5-9dc5-30a6dcb936bf.png" width=40% style="margin:60px">
+</div>
+ 
+ 
+**관리가 필요한 피보호자를 등록하세요!**  <br> 등록 이후 메인 화면에서 오른쪽과 같이 확인 가능합니다.
 
-관리가 필요한 피보호자를 등록하세요!
-<img src="https://user-images.githubusercontent.com/71186266/157553125-e4cedf37-71fd-4bf5-9dc5-30a6dcb936bf.png" width=30%>
-
-등록 이후 메인 화면에서 다음과 같이 나타납니다.
 
 ## 4. 약 등록
 ![약등록](https://user-images.githubusercontent.com/71186266/157553130-3c834ff6-a55e-4a0d-a051-931b664aca4e.png)
@@ -37,13 +39,14 @@
 메인화면에서 시간별로 섭취할 약들을 정리해서 보여줍니다
 
 ## 5. 알람 화면
-<img src="https://user-images.githubusercontent.com/71186266/157553118-a8fc3398-1e3d-4e99-ac7e-e02645c080bf.png" width=30%>
+<div>
+<img src="https://user-images.githubusercontent.com/71186266/157553118-a8fc3398-1e3d-4e99-ac7e-e02645c080bf.png" width=40%>
+<img src="https://user-images.githubusercontent.com/71186266/157553122-774446f5-09ad-48e9-9860-e3a6bbc16723.png" width=40%>
+</div>
 
-해당 시간에 피보호자는 다음과 같은 화면을 보게 됩니다
-<img src="https://user-images.githubusercontent.com/71186266/157553122-774446f5-09ad-48e9-9860-e3a6bbc16723.png" width=30%>
-
+해당 시간에 피보호자는 왼쪽과 같은 화면을 보게 됩니다. <br>
 알람 끄기를 누른 다음 간단하게 약을 먹었는지 체크할 수 있고,
-이는 실시간으로 보호자 화면에서 확인 가능합니다.
+이는 오른쪽 화면과 같이 실시간으로 보호자 화면에서 확인 가능합니다.
 
 ## 6. 채팅 화면
 보호자와 피보호자는 서로 편하게 채팅 할 수 있습니다! 이를 통해 보호자는 번호 노출 없이 소통할 수 있게 됩니다!
